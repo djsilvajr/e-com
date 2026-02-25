@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\GetProductTypeByIdRequest;
 use App\Http\Requests\GetChildProductTypesByIdRequest;
+use App\Http\Requests\CreateChildProductType;
 
 use App\Services\ProductTypeService;
+use Illuminate\Http\JsonResponse;
 
 class ProductTypeController extends Controller
 {
@@ -19,7 +21,7 @@ class ProductTypeController extends Controller
         $this->productTypeService = $productTypeService;
     }
 
-    public function getProductTypes()
+    public function getProductTypes() : JsonResponse
     {
         $productTypes = $this->productTypeService->getProductTypes();
 
@@ -42,7 +44,7 @@ class ProductTypeController extends Controller
         ]);
     }
 
-    public function getProductTypeById($id, Request $request)
+    public function getProductTypeById($id, Request $request) : JsonResponse
     {
         //$credentials = $request->only(['']);
         $credentials = [];
@@ -71,7 +73,7 @@ class ProductTypeController extends Controller
         ]);
     }
 
-    public function getChildProductTypesById($id, Request $request)
+    public function getChildProductTypesById($id, Request $request) : JsonResponse
     {
         //$credentials = $request->only(['']);
         $credentials = [];
@@ -99,4 +101,20 @@ class ProductTypeController extends Controller
             ]
         ]);
     }
+
+
+    public function createChildProductType($id, Request $request) : JsonResponse
+    {
+        //$credentials = [];
+        $credentials = $request->only(['name', 'slug', 'description', 'variant_type']);
+        $credentials['id'] = $id ?? 0;
+
+        CreateChildProductType::validate($credentials);
+
+        print_r($credentials);
+        die;
+
+
+    }
+
 }
