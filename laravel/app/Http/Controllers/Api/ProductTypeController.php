@@ -33,12 +33,15 @@ class ProductTypeController extends Controller
             '_links' => [
                 'self' => [
                     'href' => url('v1/product/types'),
+                    'method' => 'GET'
                 ],
                 'GET' => [
-                    'href' => url('v1/product/type/{id}')
+                    'href' => url('v1/product/type/{id}'),
+                    'method' => 'GET'
                 ],
                 'GET_CHILD' => [
-                    'href' => url('v1/product/type/{id}/child')
+                    'href' => url('v1/product/type/{id}/child'),
+                    'method' => 'GET'
                 ],
             ]
         ]);
@@ -62,12 +65,15 @@ class ProductTypeController extends Controller
             '_links' => [
                 'self' => [
                     'href' => url("v1/product/type/{$id}"),
+                    'method' => 'GET'
                 ],
                 'GET_ALL' => [
-                    'href' => url('v1/product/types')
+                    'href' => url('v1/product/types'),
+                    'method' => 'GET'
                 ],
                 'GET_CHILD' => [
-                    'href' => url("v1/product/type/{$id}/child")
+                    'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'GET'
                 ],
             ]
         ]);
@@ -91,12 +97,15 @@ class ProductTypeController extends Controller
             '_links' => [
                 'self' => [
                     'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'GET',
                 ],
                 'GET_TYPE' => [
-                    'href' => url("v1/product/type/{$id}")
+                    'href' => url("v1/product/type/{$id}"),
+                    'method' => 'GET',
                 ],
                 'GET_ALL' => [
-                    'href' => url('v1/product/types')
+                    'href' => url('v1/product/types'),
+                    'method' => 'GET'
                 ],
             ]
         ]);
@@ -111,10 +120,31 @@ class ProductTypeController extends Controller
 
         CreateChildProductType::validate($credentials);
 
-        print_r($credentials);
-        die;
-
-
+        $created = $this->productTypeService->createChildProductType($credentials);
+        return response()->json([
+            'status' => true,
+            'message' => 'Child product types created successfully.',
+            'errors' => [],
+            'data' => $created,
+            '_links' => [
+                'self' => [
+                    'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'POST'
+                ],
+                'GET_CHILD' => [
+                    'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'GET'
+                ],
+                'GET_TYPE' => [
+                    'href' => url("v1/product/type/{$id}"),
+                    'method' => 'GET'
+                ],
+                'GET_ALL' => [
+                    'href' => url('v1/product/types'),
+                    'method' => 'GET'
+                ],
+            ]
+        ], 201);
     }
 
 }
