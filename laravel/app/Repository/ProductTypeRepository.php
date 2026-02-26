@@ -61,7 +61,7 @@ class ProductTypeRepository implements ProductTypeInterface
         }
 
         $childProductTypes = $childProductTypes ?? [];
-        
+
         return $childProductTypes;
     }
 }
