@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\ProductType\Rules;
+namespace App\Services\ProductType\Ensures;
 
 use App\Repository\Contracts\ProductTypeInterface;
 use App\Exceptions\ResourceNotFoundException;
 
-class ProductTypeMustExist
+class EnsureProductTypeExist
 {
     public function __construct(
         private ProductTypeInterface $productTypeRepository

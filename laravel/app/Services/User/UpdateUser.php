@@ -4,23 +4,23 @@ namespace App\Services\User;
 
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Exceptions\PersistenceErrorException;
-use App\Services\User\Rules\UserMustExist;
-use App\Services\User\Rules\NewEmailMustBeAvailable;
+use App\Services\User\Ensures\EnsureUserExist;
+use App\Services\User\Ensures\EnsureNewEmailIsAvailable;
 
 class UpdateUser
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
-        private UserMustExist $userMustExistRule,
-        private NewEmailMustBeAvailable $newEmailMustBeAvailableRule
+        private EnsureUserExist $ensureUserExist,
+        private EnsureNewEmailIsAvailable $ensureNewEmailIsAvailable
     ) {}
 
     public function execute(array $credentials): array
     {
-        $this->userMustExistRule->validate($credentials['id']);
+        $this->ensureUserExist->validate($credentials['id']);
 
         $user = $this->userRepository->getUserById($credentials['id']);
-        $this->newEmailMustBeAvailableRule->validate(
+        $this->ensureNewEmailIsAvailable->validate(
             array(
                 'id' => $credentials['id'],
                 'newEmail' => $credentials['email'],

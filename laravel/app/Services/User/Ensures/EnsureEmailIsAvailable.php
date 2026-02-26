@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\User\Rules;
+namespace App\Services\User\Ensures;
 
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Exceptions\DuplicatedValueException;
 
-class EmailMustBeAvailable
+class EnsureEmailIsAvailable
 {
     public function __construct(
         private UserRepositoryInterface $userRepository

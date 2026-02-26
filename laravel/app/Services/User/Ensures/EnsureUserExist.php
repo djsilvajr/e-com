@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\User\Rules;
+namespace App\Services\User\Ensures;
 
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Exceptions\ResourceNotFoundException;
 
-class UserMustExist
+class EnsureUserExist
 {
     public function __construct(
         private UserRepositoryInterface $userRepository

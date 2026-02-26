@@ -2,23 +2,22 @@
 namespace App\Services\User;
 
 use App\Events\UserRegisteredSendEmail;
-use App\Models\FeatureFlagModel;
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Repository\Contracts\FeatureFlagInterface;
 use App\Exceptions\PersistenceErrorException;
-use App\Services\User\Rules\EmailMustBeAvailable;
+use App\Services\User\Ensures\EnsureEmailIsAvailable;
 
 class InsertUser
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private FeatureFlagInterface $featureFlagRepository,
-        private EmailMustBeAvailable $emailMustBeAvailableRule
+        private EnsureEmailIsAvailable $ensureEmailIsAvailable
     ) {}
 
     public function execute(array $credentials): array
     {
-        $this->emailMustBeAvailableRule->validate($credentials['email']);
+        $this->ensureEmailIsAvailable->validate($credentials['email']);
 
         $addition = $this->userRepository->insertUser($credentials);
         $userId = $addition['id'] ?? null;
