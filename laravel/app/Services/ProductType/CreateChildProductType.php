@@ -11,16 +11,21 @@ class CreateChildProductType {
         private ProductTypeRepository $productTypeRepository,
     ) {}
 
-    public function execute(array $request) : array
+    public function execute(array $data) : array
     {
-        $id = $request['id'];
-        $name = $request['name'];
-        $slug = $request['slug'];
-        $description = $request['description'];
-        $variantType = $request['variant_type'];
+        $id = $data['id'];
+        $name = $data['name'];
+        $slug = $data['slug'];
+        $description = $data['description'] ?? '';
+        $variantType = $data['variant_type'] ?? '';
 
         $variantTypeMustBeValidRule = new VariantTypeMustBeValid($variantType);
         $variantTypeMustBeValidRule->validate();
+
+
+        $allTypesRelatedByVariantType = $this->productTypeRepository->getAllTypesByVariantType($variantType);
+        print_r($allTypesRelatedByVariantType);
+        die;
 
         return [];
     }

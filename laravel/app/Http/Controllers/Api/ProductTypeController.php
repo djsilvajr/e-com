@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 
 class ProductTypeController extends Controller
 {
-    protected $productTypeService;
+    protected ProductTypeService $productTypeService;
 
     public function __construct(ProductTypeService $productTypeService)
     {

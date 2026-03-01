@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,9 +70,9 @@ class ProductTypeModel extends Model
         return $query->where('active', true)->orderBy('order');
     }
 
-    public function scopeOfVariant($query, array $types)
+    public function scopeOfVariant(Builder $query, string|array $types): Builder
     {
-        return $query->where('variant_type', $types);
+        $types = (array) $types; // aceita string ou array
+        return $query->whereIn('variant_type', $types);
     }
-
 }
