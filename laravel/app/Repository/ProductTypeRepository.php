@@ -7,9 +7,7 @@ use App\Exceptions\PersistenceErrorException;
 
 use Illuminate\Support\Facades\DB;
 
-
 use App\Models\ProductTypeModel;
-use PhpParser\Node\Stmt\TryCatch;
 
 class ProductTypeRepository implements ProductTypeInterface
 {
@@ -20,6 +18,7 @@ class ProductTypeRepository implements ProductTypeInterface
     {
         $this->productTypeModel = $productTypeModel;
     }
+
 
     public function getAllProductTypes(): array
     {
@@ -76,4 +75,22 @@ class ProductTypeRepository implements ProductTypeInterface
 
         return $childProductTypes;
     }
- }
+
+    public function getAllTypesByVariantType(string $variantType) : ?array {
+
+        $return = [];
+
+        try {
+            $return = $this->productTypeModel
+                ->newQuery()
+                ->select(['id', 'name', 'slug', 'description', 'parent_id', 'variant_type', 'order', 'active'])
+                ->ofVariant($variantType) // chama o scope
+                ->get()
+                ->toArray();
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $return;
+    }
+}
