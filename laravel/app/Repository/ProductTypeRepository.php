@@ -7,8 +7,20 @@ use App\Exceptions\PersistenceErrorException;
 
 use Illuminate\Support\Facades\DB;
 
+
+use App\Models\ProductTypeModel;
+use PhpParser\Node\Stmt\TryCatch;
+
 class ProductTypeRepository implements ProductTypeInterface
 {
+
+    private ProductTypeModel $productTypeModel;
+
+    public function __construct(ProductTypeModel $productTypeModel)
+    {
+        $this->productTypeModel = $productTypeModel;
+    }
+
     public function getAllProductTypes(): array
     {
         $productTypes = [];
@@ -64,4 +76,4 @@ class ProductTypeRepository implements ProductTypeInterface
 
         return $childProductTypes;
     }
-}
+ }

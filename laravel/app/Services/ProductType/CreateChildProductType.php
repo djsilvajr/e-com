@@ -4,6 +4,8 @@ namespace App\Services\ProductType;
 
 use App\Repository\ProductTypeRepository;
 use App\Services\ProductType\Rules\VariantTypeMustBeValid;
+use App\Helpers\ArrayHelper;
+use App\Exceptions\ResourceNotFoundException;
 
 class CreateChildProductType {
 
@@ -13,7 +15,7 @@ class CreateChildProductType {
 
     public function execute(array $request) : array
     {
-        $id = $request['id'];
+        $parent_id = $request['id'];
         $name = $request['name'];
         $slug = $request['slug'];
         $description = $request['description'];
@@ -21,6 +23,16 @@ class CreateChildProductType {
 
         $variantTypeMustBeValidRule = new VariantTypeMustBeValid($variantType);
         $variantTypeMustBeValidRule->validate();
+
+        $parentProductType = $this->productTypeRepository->findProductTypeById($parent_id);
+
+        if(empty($parentProductType)) {
+            throw new ResourceNotFoundException('Parent id not found', ['There is no parent with id '.$parent_id.'.']);
+        }
+
+        $parentProductType = ArrayHelper::getFirstArrayFromList($parentProductType);
+
+        dd($parentProductType);
 
         return [];
     }
