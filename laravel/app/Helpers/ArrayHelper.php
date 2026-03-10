@@ -33,4 +33,14 @@ class ArrayHelper
 
         return (array) $array[0];
     }
+
+    public static function convertStdObjectArrayToSimpleArray(array $objectsArray) : array
+    {
+
+        $newArray = array_map(function($array) {
+            return (array)$array;
+        }, $objectsArray);
+
+        return $newArray;
+    }
 }

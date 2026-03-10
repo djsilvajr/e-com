@@ -93,4 +93,24 @@ class ProductTypeRepository implements ProductTypeInterface
 
         return $return;
     }
+
+    public function insertVariantType(string $name, string $slug, string $description, int $parent_id, string $variantType) : array {
+
+        try {
+            $newProductType = $this->productTypeModel->create([
+                'name'         => $name,
+                'slug'         => $slug,
+                'description'  => $description,
+                'parent_id'    => $parent_id > 0 ? $parent_id : null,
+                'variant_type' => $variantType,
+                'active'       => 0,
+            ]);
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $newProductType->toArray();
+    }
+
+
 }

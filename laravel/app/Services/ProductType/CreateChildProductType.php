@@ -42,13 +42,15 @@ class CreateChildProductType {
 
         // === Children Based on ParentProductType and his variants
         // Get All children to make validation with the new one
-        $allTypesRelatedByVariantType = $this->productTypeRepository->getAllTypesByVariantType($variantType);
+        $allTypesRelatedByVariantType = $this->productTypeRepository->findChildProductTypesById($parent_id);
         // Validate against siblings (children of the same variant)
-        $this->validateNameAndSlugUniqueness($name, $slug, $allTypesRelatedByVariantType);
+        if(!empty($allTypesRelatedByVariantType)) {
+            $this->validateNameAndSlugUniqueness($name, $slug, ArrayHelper::convertStdObjectArrayToSimpleArray($allTypesRelatedByVariantType));
+        }
 
-
+        $creation = $this->productTypeRepository->insertVariantType($name, $slug, $description, $parent_id, $variantType);
         // Response
-        return [];
+        return $creation;
     }
 
     private function validateNameAndSlugUniqueness(string $name, string $slug, array $existingProductTypes): void
