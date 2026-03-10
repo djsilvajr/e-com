@@ -2,7 +2,7 @@
 
 namespace App\Services\ProductType;
 
-use App\Repository\ProductTypeRepository;
+use App\Repository\Contracts\ProductTypeInterface;
 use App\Services\ProductType\Rules\VariantTypeMustBeValid;
 use App\Helpers\ArrayHelper;
 use App\Exceptions\ResourceNotFoundException;
@@ -11,7 +11,7 @@ use App\Services\ProductType\Rules\ProductTypeNameAndSlugMustBeUniqueByVariantTy
 class CreateChildProductType {
 
     public function __construct(
-        private ProductTypeRepository $productTypeRepository,
+        private ProductTypeInterface $productTypeInterface,
     ) {}
 
     public function execute(array $data) : array
@@ -29,7 +29,7 @@ class CreateChildProductType {
 
         // === ParentProductType ===
         // Get Parent related to the new type
-        $parentProductType = $this->productTypeRepository->findProductTypeById($parent_id);
+        $parentProductType = $this->productTypeInterface->findProductTypeById($parent_id);
 
         if(empty($parentProductType)) {
             throw new ResourceNotFoundException('Parent id not found', ['There is no parent with id '.$parent_id.'.']);
@@ -42,13 +42,13 @@ class CreateChildProductType {
 
         // === Children Based on ParentProductType and his variants
         // Get All children to make validation with the new one
-        $allTypesRelatedByVariantType = $this->productTypeRepository->findChildProductTypesById($parent_id);
+        $allTypesRelatedByVariantType = $this->productTypeInterface->findChildProductTypesById($parent_id);
         // Validate against siblings (children of the same variant)
         if(!empty($allTypesRelatedByVariantType)) {
             $this->validateNameAndSlugUniqueness($name, $slug, ArrayHelper::convertStdObjectArrayToSimpleArray($allTypesRelatedByVariantType));
         }
 
-        $creation = $this->productTypeRepository->insertVariantType($name, $slug, $description, $parent_id, $variantType);
+        $creation = $this->productTypeInterface->insertVariantType($name, $slug, $description, $parent_id, $variantType);
         // Response
         return $creation;
     }
