@@ -6,6 +6,7 @@ use App\Repository\ProductTypeRepository;
 use App\Services\ProductType\Rules\VariantTypeMustBeValid;
 use App\Helpers\ArrayHelper;
 use App\Exceptions\ResourceNotFoundException;
+use App\Services\ProductType\Rules\ProductTypeNameAndSlugMustBeUniqueByVariantType;
 
 class CreateChildProductType {
 
@@ -21,10 +22,12 @@ class CreateChildProductType {
         $description = $data['description'] ?? '';
         $variantType = $data['variant_type'] ?? '';
 
+        // === VariantType ===
         // Variant Type validate type
         $variantTypeMustBeValidRule = new VariantTypeMustBeValid($variantType);
         $variantTypeMustBeValidRule->validate();
 
+        // === ParentProductType ===
         // Get Parent related to the new type
         $parentProductType = $this->productTypeRepository->findProductTypeById($parent_id);
 
@@ -33,14 +36,26 @@ class CreateChildProductType {
         }
 
         $parentProductType = ArrayHelper::getFirstArrayFromList($parentProductType);
+        // Validate against parent
+        $this->validateNameAndSlugUniqueness($name, $slug, [$parentProductType]);
 
-        dd($parentProductType);
 
+        // === Children Based on ParentProductType and his variants
         // Get All children to make validation with the new one
         $allTypesRelatedByVariantType = $this->productTypeRepository->getAllTypesByVariantType($variantType);
-        print_r($allTypesRelatedByVariantType);
-        die;
+        // Validate against siblings (children of the same variant)
+        $this->validateNameAndSlugUniqueness($name, $slug, $allTypesRelatedByVariantType);
 
+
+        // Response
         return [];
+    }
+
+    private function validateNameAndSlugUniqueness(string $name, string $slug, array $existingProductTypes): void
+    {
+        foreach ($existingProductTypes as $existingProductType) {
+            $rule = new ProductTypeNameAndSlugMustBeUniqueByVariantType($name, $slug, $existingProductType);
+            $rule->validate();
+        }
     }
 }
