@@ -1343,6 +1343,222 @@ paths:
                   data:
                     type: array
                     example: []
+    post:
+      tags:
+        - PRODUCT TYPES
+      summary: Create child product type
+      description: Creates a new child product type under the specified parent product type.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the parent product type
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Calçados"
+                slug:
+                  type: string
+                  example: "calcados"
+                description:
+                  type: string
+                  example: "Calçados de todos os tipos"
+                variant_type:
+                  type: string
+                  example: "clothing"
+                order:
+                  type: integer
+                  example: 3
+                icon:
+                  type: string
+                  nullable: true
+                  example: null
+                image_url:
+                  type: string
+                  nullable: true
+                  example: null
+                active:
+                  type: integer
+                  example: 1
+      responses:
+        '201':
+          description: Child product type created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Child product type created successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      name:
+                        type: string
+                        example: "Calçados"
+                      slug:
+                        type: string
+                        example: "calcados"
+                      description:
+                        type: string
+                        example: "Calçados de todos os tipos"
+                      parent_id:
+                        type: integer
+                        example: 1
+                      variant_type:
+                        type: string
+                        example: "clothing"
+                      order:
+                        type: integer
+                        example: 3
+                      icon:
+                        type: string
+                        nullable: true
+                        example: null
+                      image_url:
+                        type: string
+                        nullable: true
+                        example: null
+                      active:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: "2026-02-11 10:25:12"
+                      updated_at:
+                        type: string
+                        example: "2026-02-11 10:25:12"
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1/child
+                      GET_TYPE:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1
+                      GET_ALL:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/types
+        '409':
+          description: Duplicate detected.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Duplicate detected.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Child product type already exists.
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '422':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Error Processing Request
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - "The 'name' field is required."
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Token not found
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '404':
+          description: Product type not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Product type not found.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items: {}
+                    example: []
 
 
 
