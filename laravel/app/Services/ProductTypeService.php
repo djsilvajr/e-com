@@ -7,6 +7,7 @@ use App\Services\ProductType\GetProductTypes;
 use App\Services\ProductType\GetProductTypeById;
 use App\Services\ProductType\GetChildProductTypesById;
 use App\Services\ProductType\CreateChildProductType;
+use App\Services\ProductType\ChangeProductTypeActivationStatus;
 
 class ProductTypeService
 {
@@ -15,6 +16,7 @@ class ProductTypeService
         private GetProductTypeById $getProductTypeById,
         private GetChildProductTypesById $getChildProductTypesById,
         private CreateChildProductType $createChildProductType,
+        private ChangeProductTypeActivationStatus $changeProductTypeActivationStatus
     ) {}
 
     public function getProductTypes(): array
@@ -35,5 +37,10 @@ class ProductTypeService
     public function createChildProductType(array $request) : array
     {
         return $this->createChildProductType->execute($request);
+    }
+
+    public function changeProductTypeActivationStatus(array $request) : bool
+    {
+        return $this->changeProductTypeActivationStatus->execute($request);
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Requests\GetChildProductTypesByIdRequest;
 use App\Http\Requests\CreateChildProductType;
 
 use App\Services\ProductTypeService;
+use ChangeProductTypeActivationStatus;
 use Illuminate\Http\JsonResponse;
 
 class ProductTypeController extends Controller
@@ -145,6 +146,40 @@ class ProductTypeController extends Controller
                 ],
             ]
         ], 201);
+    }
+
+    public function changeProductTypeActivationStatus($id, Request $request) : JsonResponse
+    {
+        $credentials = $request->only(['status']);
+        $credentials['id'] = $id ?? 0;
+
+        ChangeProductTypeActivationStatus::validate($credentials);
+
+        $updated = $this->productTypeService->changeProductTypeActivationStatus($credentials);
+        return response()->json([
+            'status' => true,
+            'message' => 'Product type updated successfully.',
+            'errors' => [],
+            'data' => $updated,
+            '_links' => [
+                'self' => [
+                    'href' => url("v1/product/type/{$id}/status"),
+                    'method' => 'PATCH'
+                ],
+                'GET_TYPE' => [
+                    'href' => url("v1/product/type/{$id}"),
+                    'method' => 'GET'
+                ],
+                'GET_ALL' => [
+                    'href' => url('v1/product/types'),
+                    'method' => 'GET'
+                ],
+                'GET_CHILD' => [
+                    'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'GET'
+                ],
+            ]
+        ]);
     }
 
 }

@@ -29,6 +29,7 @@ Route::middleware('api.stack')->group(function () {
     Route::get('v1/product/type/{id}', [ProductTypeController::class, 'getProductTypeById']);
     Route::get('v1/product/type/{id}/child', [ProductTypeController::class, 'getChildProductTypesById']);
     Route::post('v1/product/type/{id}/child', [ProductTypeController::class, 'createChildProductType']);
+    Route::patch('v1/product/type/{id}/status', [ProductTypeController::class, 'changeProductTypeActivationStatus']);
 
 });
 
