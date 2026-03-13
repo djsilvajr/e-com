@@ -6,12 +6,15 @@ use App\Exceptions\ResourceNotFoundException;
 use App\Repository\Contracts\ProductTypeInterface;
 
 use App\Services\ProductType\Ensures\EnsureProductTypeExist;
+use App\Services\ProductType\Rules\ProductTypeMustNotBeDeleted;
 
 class GetProductTypeById
 {
     public function __construct(
         private ProductTypeInterface $productTypeRepository,
-        private EnsureProductTypeExist $ensureProductTypeExist
+        private EnsureProductTypeExist $ensureProductTypeExist,
+        private ProductTypeMustNotBeDeleted $productTypeMustNotBeDeletedRule,
+
     ) {
 
     }
@@ -22,6 +25,9 @@ class GetProductTypeById
 
         $productType = $this->productTypeRepository->findProductTypeById($id);
         $productTypeArray = (array) current($productType);
+
+        $this->productTypeMustNotBeDeletedRule->validate($parentProductType);
+
         return $productTypeArray;
     }
 }

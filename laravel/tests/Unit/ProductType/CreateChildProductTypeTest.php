@@ -9,6 +9,7 @@ use Mockery;
 use App\Repository\Contracts\ProductTypeInterface;
 use App\Services\ProductType\CreateChildProductType;
 use App\Http\Requests\CreateChildProductType as CreateChildProductTypeRequest;
+use App\Services\ProductType\Rules\ProductTypeMustNotBeDeleted;
 use Carbon\Carbon;
 
 class CreateChildProductTypeTest extends TestCase
@@ -86,6 +87,10 @@ class CreateChildProductTypeTest extends TestCase
 
         $this->app->instance(ProductTypeInterface::class, $productTypeRepositoryMock);
 
+        $productTypeMustNotBeDeletedMock = Mockery::mock(ProductTypeMustNotBeDeleted::class);
+        $productTypeMustNotBeDeletedMock->shouldReceive('validate')->once()->with($this->noIssuesClothingVariantTypeMock()[0])->andReturnNull();
+        $this->app->instance(ProductTypeMustNotBeDeleted::class, $productTypeMustNotBeDeletedMock);
+
         $service = $this->app->make(CreateChildProductType::class);
         $result = $service->execute($request);
 
@@ -120,6 +125,33 @@ class CreateChildProductTypeTest extends TestCase
         $service = $this->app->make(CreateChildProductType::class);
 
         $this->expectException(ResourceNotFoundException::class);
+        $service->execute($request);
+    }
+
+    public function test_execute_throws_resource_not_found_when_parent_id_is_deleted(): void
+    {
+        $parent_id = 1;
+        $request = $this->noIssueRequestInsertVariantType();
+        $request['id'] = $parent_id;
+        $mockData = $this->noIssuesClothingVariantTypeMock();
+        $mockData[0]['deleted_at'] = Carbon::now()->format('Y-m-d');
+
+        $productTypeRepositoryMock = Mockery::mock(ProductTypeInterface::class);
+        $productTypeRepositoryMock->shouldReceive('findProductTypeById')->once()->with($parent_id)->andReturn($mockData);
+        $this->app->instance(ProductTypeInterface::class, $productTypeRepositoryMock);
+
+        $productTypeMustNotBeDeletedMock = Mockery::mock(ProductTypeMustNotBeDeleted::class);
+        $productTypeMustNotBeDeletedMock->shouldReceive('validate')
+            ->once()
+            ->with($mockData[0])
+            ->andThrow(new ResourceNotFoundException('Product type is deleted'));
+        $this->app->instance(ProductTypeMustNotBeDeleted::class, $productTypeMustNotBeDeletedMock);
+
+        $service = $this->app->make(CreateChildProductType::class);
+
+        $this->expectException(ResourceNotFoundException::class);
+        $this->expectExceptionMessage('Product type is deleted');
+
         $service->execute($request);
     }
 

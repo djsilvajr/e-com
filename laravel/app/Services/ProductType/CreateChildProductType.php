@@ -7,11 +7,13 @@ use App\Services\ProductType\Rules\VariantTypeMustBeValid;
 use App\Helpers\ArrayHelper;
 use App\Exceptions\ResourceNotFoundException;
 use App\Services\ProductType\Rules\ProductTypeNameAndSlugMustBeUniqueByVariantType;
+use App\Services\ProductType\Rules\ProductTypeMustNotBeDeleted;
 
 class CreateChildProductType {
 
     public function __construct(
         private ProductTypeInterface $productTypeInterface,
+        private ProductTypeMustNotBeDeleted $productTypeMustNotBeDeletedRule,
     ) {}
 
     public function execute(array $data) : array
@@ -38,6 +40,7 @@ class CreateChildProductType {
         $parentProductType = ArrayHelper::getFirstArrayFromList($parentProductType);
         // Validate against parent
         $this->validateNameAndSlugUniqueness($name, $slug, [$parentProductType]);
+        $this->productTypeMustNotBeDeletedRule->validate($parentProductType);
 
 
         // === Children Based on ParentProductType and his variants
