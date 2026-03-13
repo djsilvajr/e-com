@@ -26,7 +26,7 @@ class ProductTypeRepository implements ProductTypeInterface
 
         try {
             $productTypes = DB::table('product_types')
-                ->select('id', 'name', 'slug', 'description', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at')
+                ->select('id', 'name', 'slug', 'description', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at', 'deleted_at')
                 ->where('parent_id', null)
                 ->get()
                 ->toArray();
@@ -44,7 +44,7 @@ class ProductTypeRepository implements ProductTypeInterface
 
         try {
             $productType = DB::table('product_types')
-                ->select('id', 'name', 'slug', 'description', 'parent_id', 'variant_type', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at')
+                ->select('id', 'name', 'slug', 'description', 'parent_id', 'variant_type', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at', 'deleted_at')
                 ->where('id', $id)
                 ->get()
                 ->toArray();
@@ -62,7 +62,7 @@ class ProductTypeRepository implements ProductTypeInterface
 
         try {
             $childProductTypes = DB::table('product_types')
-                ->select('id', 'name', 'slug', 'description', 'parent_id', 'variant_type', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at')
+                ->select('id', 'name', 'slug', 'description', 'parent_id', 'variant_type', 'order', 'icon', 'image_url', 'active', 'created_at', 'updated_at', 'deleted_at')
                 ->where('parent_id', $id)
                 ->get()
                 ->toArray();
@@ -110,6 +110,19 @@ class ProductTypeRepository implements ProductTypeInterface
         }
 
         return $newProductType->toArray();
+    }
+
+    public function updateProductTypeStatus(int $id, bool $status) : bool {
+        try {
+            $update = $this->productTypeModel
+                ->newQuery()
+                ->where('id', $id)
+                ->update(['active' => $status]);
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $update > 0;
     }
 
 

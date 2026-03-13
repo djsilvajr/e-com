@@ -8,4 +8,5 @@ interface ProductTypeInterface
     public function findProductTypeById(int $id) : array;
     public function findChildProductTypesById(int $id) : array;
     public function insertVariantType(string $name, string $slug, string $description, int $parent_id, string $variantType) : array;
+    public function updateProductTypeStatus(int $id, bool $status) : bool;
 }

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GetProductTypeByIdRequest;
 use App\Http\Requests\GetChildProductTypesByIdRequest;
 use App\Http\Requests\CreateChildProductType;
+use App\Http\Requests\ChangeProductTypeActivationStatus;
 
 use App\Services\ProductTypeService;
-use ChangeProductTypeActivationStatus;
 use Illuminate\Http\JsonResponse;
 
 class ProductTypeController extends Controller

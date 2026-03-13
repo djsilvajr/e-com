@@ -1,22 +1,24 @@
 <?php
 
+namespace App\Http\Requests;
+
 use App\Contracts\RequestValidationInterface;
 use App\Helpers\Validator;
-
 use App\Exceptions\InvalidParametersException;
+use App\Enums\ProductTypeActivationStatus;
 
 class ChangeProductTypeActivationStatus implements RequestValidationInterface {
 
     public static function validate(array $credentials) : void {
 
         $id = $credentials['id'] ?? 0;
-        $statusValidation = ($credentials['status'] === 'TRUE' || $credentials['status'] === 'FALSE') ? true : false;
+        $status = strtoupper($credentials['status'] ?? '');
 
         if(!Validator::positiveInt($id)) {
             throw new InvalidParametersException('Invalid parameters.', ['ID is not valid.']);
         }
 
-        if(!$statusValidation) {
+        if(!ProductTypeActivationStatus::tryFrom($status)) {
             throw new InvalidParametersException('Invalid parameters.', ['Status should be sent as "TRUE" or "FALSE".']);
         }
 
