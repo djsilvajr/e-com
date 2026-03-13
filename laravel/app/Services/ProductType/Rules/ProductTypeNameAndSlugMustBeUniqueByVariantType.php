@@ -3,6 +3,7 @@
 namespace App\Services\ProductType\Rules;
 
 use App\Exceptions\BusinessRuleException;
+use App\Exceptions\DuplicatedValueException;
 
 class ProductTypeNameAndSlugMustBeUniqueByVariantType
 {
@@ -15,14 +16,14 @@ class ProductTypeNameAndSlugMustBeUniqueByVariantType
     public function validate(): void
     {
         if ($this->existingProductType['name'] === $this->name) {
-            throw new BusinessRuleException(
+            throw new DuplicatedValueException(
                 'Duplicate name',
                 ["A product type with name '{$this->name}' already exists for this variant type."]
             );
         }
 
         if ($this->existingProductType['slug'] === $this->slug) {
-            throw new BusinessRuleException(
+            throw new DuplicatedValueException(
                 'Duplicate slug',
                 ["A product type with slug '{$this->slug}' already exists for this variant type."]
             );
