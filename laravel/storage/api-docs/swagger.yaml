@@ -1559,6 +1559,149 @@ paths:
                     type: array
                     items: {}
                     example: []
+  
+  /api/v1/product/type/{id}/status:
+    patch:
+      tags:
+        - PRODUCT TYPES
+      summary: Change product type activation status
+      description: Activates or deactivates a product type by its ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the product type
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [TRUE, FALSE]
+                  example: "TRUE"
+      responses:
+        '200':
+          description: Product type updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product type updated successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: boolean
+                    example: true
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1/status
+                      GET_TYPE:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1
+                      GET_ALL:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/types
+                      GET_CHILD:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1/child
+        '422':
+          description: Invalid parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Invalid parameters.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - ID is not valid.
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Token not found
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '404':
+          description: Product type not found or deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Parent id not found
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - There is no parent with id 1.
+                  data:
+                    type: array
+                    items: {}
+                    example: []
 
 
 
