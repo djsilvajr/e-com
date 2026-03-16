@@ -8,6 +8,7 @@ use App\Exceptions\PersistenceErrorException;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\ProductTypeModel;
+use Carbon\Carbon;
 
 class ProductTypeRepository implements ProductTypeInterface
 {
@@ -125,5 +126,20 @@ class ProductTypeRepository implements ProductTypeInterface
         return $update > 0;
     }
 
+    public function deleteProductTypeById(int $id) : bool {
+         try {
+            $delete = $this->productTypeModel
+                ->newQuery()
+                ->where('id', $id)
+                ->update([
+                    'deleted_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'active' => false
+                ]);
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $delete > 0;
+    }
 
 }

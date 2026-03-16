@@ -8,6 +8,7 @@ use App\Services\ProductType\GetProductTypeById;
 use App\Services\ProductType\GetChildProductTypesById;
 use App\Services\ProductType\CreateChildProductType;
 use App\Services\ProductType\ChangeProductTypeActivationStatus;
+use App\Services\ProductType\DeleteProductTypeById;
 
 class ProductTypeService
 {
@@ -16,7 +17,8 @@ class ProductTypeService
         private GetProductTypeById $getProductTypeById,
         private GetChildProductTypesById $getChildProductTypesById,
         private CreateChildProductType $createChildProductType,
-        private ChangeProductTypeActivationStatus $changeProductTypeActivationStatus
+        private ChangeProductTypeActivationStatus $changeProductTypeActivationStatus,
+        private DeleteProductTypeById $deleteProductTypeById
     ) {}
 
     public function getProductTypes(): array
@@ -42,5 +44,10 @@ class ProductTypeService
     public function changeProductTypeActivationStatus(array $request) : bool
     {
         return $this->changeProductTypeActivationStatus->execute($request);
+    }
+
+    public function deleteProductTypeById(array $request) : bool
+    {
+        return $this->deleteProductTypeById->execute($request);
     }
 }

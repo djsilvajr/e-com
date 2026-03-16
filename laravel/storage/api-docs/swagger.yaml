@@ -1111,6 +1111,157 @@ paths:
                   data:
                     type: array
                     example: []
+    delete:
+      tags:
+        - PRODUCT TYPES
+      summary: Delete product type
+      description: Soft deletes a product type by its ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the product type to delete
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Product type deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product type deleted successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: boolean
+                    example: true
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1/status
+                      GET_TYPE:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1
+                      GET_ALL:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/types
+                      GET_CHILD:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/type/1/child
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Token not found
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '404':
+          description: Product type not found or already deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Parent id not found
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - There is no parent with id 1.
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '500':
+          description: Persistence error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Error processing request.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+        '422':
+          description: Error validating fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Error Processing Request"
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - "The email field is required."
+                  data:
+                    type: array
+                    items: {}
+                    example: []
   
   /api/v1/product/type/{id}/child:
     get:

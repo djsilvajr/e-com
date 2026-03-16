@@ -182,4 +182,39 @@ class ProductTypeController extends Controller
         ]);
     }
 
+    public function deleteProductTypeById($id, Request $request) {
+
+        $credentials = [];
+        $credentials = array_merge($credentials, ['id' => $id]);
+
+        $deleted = $this->productTypeService->deleteProductTypeById($credentials);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product type deleted successfully.',
+            'errors' => [],
+            'data' => $deleted,
+            '_links' => [
+                'self' => [
+                    'href' => url("v1/product/type/{$id}/status"),
+                    'method' => 'PATCH'
+                ],
+                'GET_TYPE' => [
+                    'href' => url("v1/product/type/{$id}"),
+                    'method' => 'GET'
+                ],
+                'GET_ALL' => [
+                    'href' => url('v1/product/types'),
+                    'method' => 'GET'
+                ],
+                'GET_CHILD' => [
+                    'href' => url("v1/product/type/{$id}/child"),
+                    'method' => 'GET'
+                ],
+            ]
+        ]);
+
+    }
+
+
 }
