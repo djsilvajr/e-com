@@ -24,13 +24,15 @@ Route::middleware('api.stack')->group(function () {
     Route::post('/cache', [CacheController::class, 'store']);
     Route::get('/cache/{key}', [CacheController::class, 'show']);
     Route::delete('/cache/{key}', [CacheController::class, 'destroy']);
-    //Product
+    //Product Type
     Route::get('v1/product/types', [ProductTypeController::class, 'getProductTypes']);
     Route::get('v1/product/type/{id}', [ProductTypeController::class, 'getProductTypeById']);
     Route::get('v1/product/type/{id}/child', [ProductTypeController::class, 'getChildProductTypesById']);
     Route::post('v1/product/type/{id}/child', [ProductTypeController::class, 'createChildProductType']);
     Route::patch('v1/product/type/{id}/status', [ProductTypeController::class, 'changeProductTypeActivationStatus']);
     Route::delete('v1/product/type/{id}/', [ProductTypeController::class, 'deleteProductTypeById']);
+
+    //Product
 });
 
 

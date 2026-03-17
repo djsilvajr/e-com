@@ -26,7 +26,7 @@ class GetProductTypeById
         $productType = $this->productTypeRepository->findProductTypeById($id);
         $productTypeArray = (array) current($productType);
 
-        $this->productTypeMustNotBeDeletedRule->validate($parentProductType);
+        $this->productTypeMustNotBeDeletedRule->validate($productTypeArray);
 
         return $productTypeArray;
     }
