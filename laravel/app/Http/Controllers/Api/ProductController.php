@@ -16,4 +16,21 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
+    public function getProductById(\App\Http\Requests\GetProductByIdRequest $request, $id)
+    {
+        $product = $this->productService->getProductById($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Product fetched successfully.',
+            'errors' => [],
+            'data' => $product,
+            'links' => [
+                'self' => url("/v1/product/{$id}"),
+                'delete' => url("/v1/product/{$id}"),
+                'update' => url("/v1/product/{$id}"),
+                'post' => url("/v1/product"),
+            ]
+        ]);
+    }
+
 }

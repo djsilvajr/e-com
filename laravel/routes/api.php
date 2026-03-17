@@ -33,6 +33,7 @@ Route::middleware('api.stack')->group(function () {
     Route::delete('v1/product/type/{id}/', [ProductTypeController::class, 'deleteProductTypeById']);
 
     //Product
+    Route::get('v1/product/{id}', [ProductController::class, 'getProductById']);
 });
 
 

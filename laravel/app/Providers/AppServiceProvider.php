@@ -6,9 +6,11 @@ use Illuminate\Support\ServiceProvider;
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Repository\Contracts\FeatureFlagInterface;
 use App\Repository\Contracts\ProductTypeInterface;
+use App\Repository\Contracts\ProductInterface;
 use App\Repository\UserRepository;
 use App\Repository\FeatureFlagRepository;
 use App\Repository\ProductTypeRepository;
+use App\Repository\ProductRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(FeatureFlagInterface::class, FeatureFlagRepository::class);
         $this->app->bind(ProductTypeInterface::class, ProductTypeRepository::class);
+        $this->app->bind(ProductInterface::class, ProductRepository::class);
     }
 
     /**
