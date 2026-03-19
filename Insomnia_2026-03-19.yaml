@@ -1,0 +1,1117 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Brazilian Color
+meta:
+  id: wrk_62885ac02f18468faeaff612315e784f
+  created: 1754653686305
+  modified: 1754653705851
+  description: ""
+collection:
+  - name: API-PADRÃO
+    meta:
+      id: fld_59826c87be8140c583ed695019c3ad65
+      created: 1743763755874
+      modified: 1743855442329
+      sortKey: -1743763755874
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_0bbd701a2c1e4a8b8f8464b839b8c745
+          created: 1743775765944
+          modified: 1743775765944
+          sortKey: -1743775765944
+          description: ""
+  - name: API-TRANSPORTADORA
+    meta:
+      id: fld_6c89e2ff2e7a41fa83935037fe1aaa71
+      created: 1743855460049
+      modified: 1743855460049
+      sortKey: -1743855460049
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_ea36d13e4f2f44f38ecb22a7a41c17e8
+          created: 1743857940768
+          modified: 1743880780529
+          sortKey: -1743858061657
+          description: ""
+  - name: API-REPRESENTANTE
+    meta:
+      id: fld_fbced0fb85694cf6adad66c178a4fef2
+      created: 1743880805144
+      modified: 1743880805144
+      sortKey: -1743880805144
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_8ffc562306fa49a0aff1bdfbdcc708cc
+          created: 1743880814451
+          modified: 1743880854263
+          sortKey: -1743880826837
+          description: ""
+      - name: Preposto
+        meta:
+          id: fld_db658adb547a42ec9a2cb1ca263887ef
+          created: 1749150253306
+          modified: 1749150253306
+          sortKey: -1749150253306
+          description: ""
+      - name: Autenticação
+        meta:
+          id: fld_8d58553fac3549e59f3d978106146d0f
+          created: 1761061942042
+          modified: 1761061942042
+          sortKey: -1761061942042
+          description: ""
+      - name: V1
+        meta:
+          id: fld_f1278b7be5eb48d2b537282e48085e0b
+          created: 1764781015139
+          modified: 1764781015139
+          sortKey: -1764781015139
+          description: ""
+        children:
+          - name: Vendedor
+            meta:
+              id: fld_3c6ab422719b4949a7f2af47058528d7
+              created: 1764781024074
+              modified: 1764781024074
+              sortKey: -1764781024074
+              description: ""
+  - name: API-PRODUTOS
+    meta:
+      id: fld_074abe1ad2a14d64a3a1aac68ada3c3a
+      created: 1744049838156
+      modified: 1744049838156
+      sortKey: -1744049838156
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_42a9a32365544087aa774ec73e109922
+          created: 1744049848728
+          modified: 1744109363269
+          sortKey: -1744109357959
+          description: ""
+      - name: MDP
+        meta:
+          id: fld_e2411960b4df413bab7ace02db7985c0
+          created: 1750784439651
+          modified: 1750784439651
+          sortKey: -1750784439651
+          description: ""
+      - name: Campanha
+        meta:
+          id: fld_d56759744963459ab7b409f1bf43bec1
+          created: 1763052718541
+          modified: 1763052718541
+          sortKey: -1763052718541
+          description: ""
+      - name: V1
+        meta:
+          id: fld_79693a6b86d74bac9be260a3c0ef5e41
+          created: 1764868287417
+          modified: 1764868287417
+          sortKey: -1764868287417
+          description: ""
+        children:
+          - name: Produtos
+            meta:
+              id: fld_3c8a8032d9354957af19c9742636525a
+              created: 1764868293175
+              modified: 1764868293175
+              sortKey: -1764868293175
+              description: ""
+          - name: Embalagens
+            meta:
+              id: fld_05be5ac017d7498bb2fb3c6a16550a45
+              created: 1772104408637
+              modified: 1772104408637
+              sortKey: -1772104408637
+              description: ""
+  - name: API-CLIENTES
+    meta:
+      id: fld_14db73ce71874517921251fe37f6c1c8
+      created: 1744227264563
+      modified: 1744227285997
+      sortKey: -1743809607961.5
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_690767dc6853459e9d79a2f22b13fb43
+          created: 1744227295757
+          modified: 1744227427015
+          sortKey: -1744227312241
+          description: ""
+      - name: Saldo
+        meta:
+          id: fld_f52daae514c94f2da9da5daed5d2907c
+          created: 1772624163567
+          modified: 1772624163567
+          sortKey: -1772624163567
+          description: ""
+  - name: API-PEDIDOS
+    meta:
+      id: fld_256e0b3c2d7e47738f69970e3b81b815
+      created: 1744368917088
+      modified: 1744368928279
+      sortKey: -1743763755824
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_c95379e0f5df4b38838f423c15648ccc
+          created: 1744368917089
+          modified: 1744368917089
+          sortKey: -1743775765944
+          description: ""
+      - name: Orcamento
+        meta:
+          id: fld_beaa146659c0424ba880d6745b95183d
+          created: 1746621818909
+          modified: 1746621818909
+          sortKey: -1746621818909
+          description: ""
+      - name: Itens
+        meta:
+          id: fld_99d54849b0884ee5a5b36ebe4f9558b9
+          created: 1746621826993
+          modified: 1746621826993
+          sortKey: -1746621826993
+          description: ""
+      - name: Desconto
+        meta:
+          id: fld_42fe0fc8327e4875b0c7ff2411f52cd8
+          created: 1746621835229
+          modified: 1746621835229
+          sortKey: -1746621835229
+          description: ""
+      - name: Campanhas
+        meta:
+          id: fld_5756c96163794f4aac77c79e57228d74
+          created: 1748285383827
+          modified: 1748285383827
+          sortKey: -1748285383827
+          description: ""
+      - name: Industria
+        meta:
+          id: fld_f0dc2d1621e44947b58201de7f618de0
+          created: 1758021661117
+          modified: 1758021661117
+          sortKey: -1758021661117
+          description: ""
+      - name: Coleta
+        meta:
+          id: fld_d189a80660d143588e610d1072f427c6
+          created: 1758285472905
+          modified: 1758285472905
+          sortKey: -1758285472905
+          description: ""
+      - name: Amostra
+        meta:
+          id: fld_43fafd66ddca4ab785a2b177191c6f8d
+          created: 1758635235481
+          modified: 1759147285466
+          sortKey: -1758285473005
+          description: ""
+      - name: v1
+        meta:
+          id: fld_de06eaae579e4e2d8f72832f757b20c5
+          created: 1764679496557
+          modified: 1764679496557
+          sortKey: -1764679496557
+          description: ""
+        children:
+          - name: Orcamentos
+            meta:
+              id: fld_21b0e6b5611849a4ba56136b5180cd38
+              created: 1764679507643
+              modified: 1764679507643
+              sortKey: -1764679507643
+              description: ""
+          - name: Orçamento Itens
+            meta:
+              id: fld_0e9da14471a54584bf335916d175f4fb
+              created: 1764685673711
+              modified: 1764685673711
+              sortKey: -1764685673711
+              description: ""
+          - name: Descontos
+            meta:
+              id: fld_87606e04129b4d2b901bd4360f6e7b41
+              created: 1764761218386
+              modified: 1764761218386
+              sortKey: -1764761218386
+              description: ""
+          - name: Campanhas
+            meta:
+              id: fld_ea431ca732e3436892ce866ab640430e
+              created: 1764769302612
+              modified: 1764769302612
+              sortKey: -1764769302612
+              description: ""
+          - name: Industria
+            meta:
+              id: fld_59ebdd46623f4274be5bf3ca9bc8b70e
+              created: 1764770774642
+              modified: 1764770774642
+              sortKey: -1764770774642
+              description: ""
+          - name: Coleta
+            meta:
+              id: fld_0ed7d12d3b5544e394257b71ab439cd6
+              created: 1764771035442
+              modified: 1764771035442
+              sortKey: -1764771035442
+              description: ""
+          - name: sd
+            meta:
+              id: fld_897e186c110442f99e12cf3f8d660d93
+              created: 1770123905861
+              modified: 1770135695877
+              sortKey: -1764771035542
+              description: ""
+  - name: API-FUNCIONARIOS
+    meta:
+      id: fld_dcde7f0ea59b4180ab9707d16a688261
+      created: 1753105617671
+      modified: 1753105617671
+      sortKey: -1753105617671
+      description: ""
+    children:
+      - name: Funcionario
+        meta:
+          id: fld_dce676fa6fcc4038949b6f2c39549e03
+          created: 1753182044302
+          modified: 1753182044302
+          sortKey: -1753182044302
+          description: ""
+  - name: Test
+    meta:
+      id: fld_10bcf00058fc4329b5ed1e1842fde955
+      created: 1767982956286
+      modified: 1767982956286
+      sortKey: -1767982956286
+      description: ""
+    children:
+      - name: Users
+        meta:
+          id: fld_d1f6e428e5ea48d48303785e39433275
+          created: 1767983898585
+          modified: 1767983898585
+          sortKey: -1767983898585
+          description: ""
+        children:
+          - url: http://localhost:8020/api/v1/user/4
+            name: User
+            meta:
+              id: req_c5aa84aa879b4e8b8e2b144f5d437402
+              created: 1768235569772
+              modified: 1769427844272
+              isPrivate: false
+              description: ""
+              sortKey: -1768235572524
+            method: GET
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY5NDI3MzMyLCJleHAiOjE3Njk0MzA5MzIsIm5iZiI6MTc2OTQyNzMzMiwianRpIjoib1cwN3ZPbkE3ZzdhUjhoRiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.7FX8coFrchSmnxG1qFeSiBCqCou3HCdqmBOo9Klwq04
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/v1/user/
+            name: User
+            meta:
+              id: req_4d8dbfc5b6a34c5badc05f0be4980b3c
+              created: 1768322266683
+              modified: 1770036288789
+              isPrivate: false
+              description: ""
+              sortKey: -1768140203849.5
+            method: POST
+            parameters:
+              - name: email
+                value: douglasj.0809@gmail.com
+                description: ""
+                disabled: false
+              - name: password
+                value: Teste001@
+                description: ""
+                disabled: false
+              - name: name
+                value: Teste2
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzcwMDM2MjczLCJleHAiOjE3NzAwMzk4NzMsIm5iZiI6MTc3MDAzNjI3MywianRpIjoiTlpscWJPVEpwRnZnbktGNyIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.E4HCPnJW43KzfT_slWS1wXy--SQ1_YIzbayzGk1ZMeg
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/v1/user/4
+            name: User
+            meta:
+              id: req_67eaf272c0ee457992c30864ecc45fbe
+              created: 1769087973911
+              modified: 1769427867767
+              isPrivate: false
+              description: ""
+              sortKey: -1768187888186.75
+            method: DELETE
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY5NDI3MzMyLCJleHAiOjE3Njk0MzA5MzIsIm5iZiI6MTc2OTQyNzMzMiwianRpIjoib1cwN3ZPbkE3ZzdhUjhoRiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.7FX8coFrchSmnxG1qFeSiBCqCou3HCdqmBOo9Klwq04
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/v1/user/4
+            name: User
+            meta:
+              id: req_0ddf7ed13b5d4354994b599048c1492b
+              created: 1769427432979
+              modified: 1769427836621
+              isPrivate: false
+              description: ""
+              sortKey: -1768092519512.25
+            method: PUT
+            parameters:
+              - name: email
+                value: douglasj.0809@gmail.com
+                description: ""
+                disabled: false
+              - name: name
+                value: Teste20
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY5NDI3MzMyLCJleHAiOjE3Njk0MzA5MzIsIm5iZiI6MTc2OTQyNzMzMiwianRpIjoib1cwN3ZPbkE3ZzdhUjhoRiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.7FX8coFrchSmnxG1qFeSiBCqCou3HCdqmBOo9Klwq04
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: JWT
+        meta:
+          id: fld_abfa46504ad749d9a12a86e9cc165ec1
+          created: 1767983905143
+          modified: 1767983905143
+          sortKey: -1767983905143
+          description: ""
+        children:
+          - url: http://localhost:8020/api/login
+            name: Login
+            meta:
+              id: req_6088741285904f9a80c389ba075ebd0f
+              created: 1767982968826
+              modified: 1768649470866
+              isPrivate: false
+              description: ""
+              sortKey: -1767983909969
+            method: POST
+            parameters:
+              - name: email
+                value: t3stemail3nvio01@gmail.com
+                description: ""
+                disabled: false
+              - name: password
+                value: Test@1234
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/user/self
+            name: /user/self
+            meta:
+              id: req_57f26d1d63c44d0481aa29a4678c1a36
+              created: 1767983927255
+              modified: 1768652696924
+              isPrivate: false
+              description: ""
+              sortKey: -1766426102814.5
+            method: GET
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY4NjUyNjg0LCJleHAiOjE3Njg2NTYyODQsIm5iZiI6MTc2ODY1MjY4NCwianRpIjoiNkZCaGlNUTIzU2hsMk5hdiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.KAsefTLqk6r6-dV8yecKJ77vXei-QH2C_wI-XSzA1tI
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/user/self
+            name: /user/self
+            meta:
+              id: req_30e9a8fc6b10493292b18bfbfb20d4ba
+              created: 1768224416666
+              modified: 1768224416666
+              isPrivate: false
+              description: ""
+              sortKey: -1765647199237.25
+            method: GET
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY3OTgzODgyLCJleHAiOjE3Njc5ODc0ODIsIm5iZiI6MTc2Nzk4Mzg4MiwianRpIjoiM09oS1F4YXA4ak5XQVJKMyIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.FfPBdWxhHOgPT-UiImpVxrminJU2ldDCdz9ahHPlgaI
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: cache
+        meta:
+          id: fld_f968a359f1994bb48b09c95805ec8e29
+          created: 1768044809146
+          modified: 1768044809146
+          sortKey: -1768044809146
+          description: ""
+        children:
+          - url: http://localhost:8020/api/cache
+            name: store
+            meta:
+              id: req_17cdb233669f456a9673a1bb2faaedc0
+              created: 1768044825911
+              modified: 1768228630469
+              isPrivate: false
+              description: ""
+              sortKey: -1768044835175
+            method: POST
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: key
+                  value: testeKey
+                  description: ""
+                  disabled: false
+                - name: value
+                  value: teste Valor
+                  description: ""
+                  disabled: false
+                - name: ttl
+                  value: ""
+                  description: ""
+                  disabled: false
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY4MjI4NjE4LCJleHAiOjE3NjgyMzIyMTgsIm5iZiI6MTc2ODIyODYxOCwianRpIjoidk1LNldDWnJzd3Fsbmh0ZCIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.SHMvGlSyZl-YfTmvhU_cHKkaO3CMH99aj52tFo-lnyg
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/cache/testeKey
+            name: cache/{key}
+            meta:
+              id: req_2cec768077104cc68e7594ef1882e1c9
+              created: 1768045116268
+              modified: 1768306156365
+              isPrivate: false
+              description: ""
+              sortKey: -1768014372572
+            method: GET
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: key
+                  value: testeKey
+                  description: ""
+                  disabled: false
+                - name: value
+                  value: teste Valor
+                  description: ""
+                  disabled: false
+                - name: ttl
+                  value: ""
+                  description: ""
+                  disabled: false
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY4MzA2MTQ3LCJleHAiOjE3NjgzMDk3NDcsIm5iZiI6MTc2ODMwNjE0NywianRpIjoiT2FiQTlXbUVaSjFGeWZjSCIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.j16TKfgqu4iiIf8R7HXBpb5vCRDwST-bKApRBqE7HK8
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/cache/testeKey
+            name: cache/{key}
+            meta:
+              id: req_b94bad81b38b46e7bfbc753a39da3d1a
+              created: 1768045232457
+              modified: 1768231316850
+              isPrivate: false
+              description: ""
+              sortKey: -1767999141270.5
+            method: DELETE
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: key
+                  value: testeKey
+                  description: ""
+                  disabled: false
+                - name: value
+                  value: teste Valor
+                  description: ""
+                  disabled: false
+                - name: ttl
+                  value: ""
+                  description: ""
+                  disabled: false
+            parameters:
+              - name: email
+                value: admin@teste.com
+                description: ""
+                disabled: false
+              - name: password
+                value: "123456"
+                description: ""
+                disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+              - name: User-Agent
+                value: insomnia/12.2.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzY4MjI4NjE4LCJleHAiOjE3NjgyMzIyMTgsIm5iZiI6MTc2ODIyODYxOCwianRpIjoidk1LNldDWnJzd3Fsbmh0ZCIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.SHMvGlSyZl-YfTmvhU_cHKkaO3CMH99aj52tFo-lnyg
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Product
+        meta:
+          id: fld_2d15d1a8ef324f6db78e5a9361116fc5
+          created: 1771411593331
+          modified: 1771411593331
+          sortKey: -1771411593331
+          description: ""
+        children:
+          - url: http://localhost:8020/api/v1/product/1
+            name: /{id}
+            meta:
+              id: req_563aec42cb0a46ebafaffcc1da29adf0
+              created: 1773746694872
+              modified: 1773945106282
+              isPrivate: false
+              description: ""
+              sortKey: -1773746694872
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/12.4.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczOTQ0MDIwLCJleHAiOjE3NzM5NDc2MjAsIm5iZiI6MTc3Mzk0NDAyMCwianRpIjoiRFBFRU5Gbkd3ejMyNm4xTiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.cG7GX5mhMhMGPL4GFTBB53JYj611ZVDfuLAIdRwTHyg
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/v1/product/
+            name: /product
+            meta:
+              id: req_ba4e48d8cae8463da02138438a7a8961
+              created: 1773919177212
+              modified: 1773943804735
+              isPrivate: false
+              description: ""
+              sortKey: -1773746692786.5
+            method: POST
+            body:
+              mimeType: application/json
+              text: >-
+                {
+                  "product_type_id": 36,
+                  "name": "Camiseta Básica Algodão",
+                  "sku": "CB-ALG-0003a",
+                  "description": "Camiseta básica 100% algodão, confortável e resistente. Lavável à máquina.",
+                  "short_description": "Camiseta básica de algodão, corte regular.",
+                  "brand": "MarcaExemplo",
+                  "model": "MX-TSHIRT-01",
+                  "attributes": {
+                    "care_instructions": "Lavar à máquina até 30°C. Não usar alvejante. Secar à sombra. Passar a ferro em temperatura média.",
+                    "origin_country": "Brasil",
+                    "certifications": "OEKO-TEX / BSCI",
+                    "sustainable": true,
+                    "fabric_weight_gsm": 180,
+                    "suitable_for": "Uso casual"
+                  },
+                  "avg_weight": 0.25,
+                  "avg_dimensions": {
+                    "width": 30.0,
+                    "height": 2.0,
+                    "length": 40.0,
+                    "unit": "cm"
+                  },
+                  "total_stock": 120,
+                  "min_stock": 10,
+                  "meta_title": "Camiseta Básica - MarcaExemplo",
+                  "meta_description": "Camiseta básica em algodão — conforto e durabilidade.",
+                  "meta_keywords": ["camiseta", "algodão", "básica", "roupas"],
+                  "active": 1,
+                  "is_featured": 0,
+                  "is_new": 1,
+                  "has_variants": 1,
+                  "available_at": "2026-03-20T09:00:00Z"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/12.4.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczOTQxMTkxLCJleHAiOjE3NzM5NDQ3OTEsIm5iZiI6MTc3Mzk0MTE5MSwianRpIjoiTFRzVWtLUk5PM0ViYXZVeiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.LnR2mAN7js4eB8wY2TIqAGgoKP8c3so37JwWUr0GN64
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - name: Types
+            meta:
+              id: fld_f485c24e3f3144c79ce81555bfa6a834
+              created: 1773746690701
+              modified: 1773746690701
+              sortKey: -1773746690701
+              description: ""
+            children:
+              - url: http://localhost:8020/api/v1/product/types
+                name: /types
+                meta:
+                  id: req_c74038c04a314a208ad550e590d092cc
+                  created: 1771411637241
+                  modified: 1773746712209
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712179
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzcxNDE4NDA0LCJleHAiOjE3NzE0MjIwMDQsIm5iZiI6MTc3MTQxODQwNCwianRpIjoic3BWbDVQTzlHMzNWZ2U5cSIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.YhjALLpWwCbwxC-q1yMCLRnNQ-BljHRPLvkXFUjbB3E
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: http://localhost:8020/api/v1/product/type/2
+                name: /type/{id}
+                meta:
+                  id: req_2fec6edeba1548ee88924cdaf31bd98b
+                  created: 1771435216694
+                  modified: 1773944038349
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712079
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczOTQ0MDIwLCJleHAiOjE3NzM5NDc2MjAsIm5iZiI6MTc3Mzk0NDAyMCwianRpIjoiRFBFRU5Gbkd3ejMyNm4xTiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.cG7GX5mhMhMGPL4GFTBB53JYj611ZVDfuLAIdRwTHyg
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: http://localhost:8020/api/v1/product/type/1/child
+                name: /type/{id}/child
+                meta:
+                  id: req_00b8def47549433181c449b2ed6a092c
+                  created: 1771511629258
+                  modified: 1773746717528
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712129
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzcxNTI0OTE2LCJleHAiOjE3NzE1Mjg1MTYsIm5iZiI6MTc3MTUyNDkxNiwianRpIjoicHo5RkVXSkJ0RUhzRmdMRCIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.Tqb3uKFzD9dPDbAPhn-5Xn06zpa8hokZfwf-mBhCs_E
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: http://localhost:8020/api/v1/product/type/2/child
+                name: /type/{id}/child
+                meta:
+                  id: req_37c6f20c342c4ee29865b141b8a552b4
+                  created: 1772018778953
+                  modified: 1773941567266
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712104
+                method: POST
+                parameters:
+                  - name: name
+                    value: Camisas casuais
+                    description: ""
+                    disabled: false
+                  - name: slug
+                    value: camisas-casuais
+                    description: ""
+                    disabled: false
+                  - name: description
+                    value: Camisetas para uso diário
+                    description: ""
+                    disabled: false
+                  - name: variant_type
+                    value: clothing
+                    description: ""
+                    disabled: false
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczOTQxMTkxLCJleHAiOjE3NzM5NDQ3OTEsIm5iZiI6MTc3Mzk0MTE5MSwianRpIjoiTFRzVWtLUk5PM0ViYXZVeiIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.LnR2mAN7js4eB8wY2TIqAGgoKP8c3so37JwWUr0GN64
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: http://localhost:8020/api/v1/product/type/34/status
+                name: /type/{id}/child/status
+                meta:
+                  id: req_df7123af5a134c7ebf371e1986616441
+                  created: 1773407715575
+                  modified: 1773746722448
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712085.25
+                method: PATCH
+                parameters:
+                  - name: status
+                    value: "FALSE"
+                    description: ""
+                    disabled: false
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczNDA4MjI0LCJleHAiOjE3NzM0MTE4MjQsIm5iZiI6MTc3MzQwODIyNCwianRpIjoic0lNUEZLQTBsaGtFNE00ayIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.myX6IM3-TBHRnbQOmA9Wi1Qxz1gjDJdc4f3gpzviLg4
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: http://localhost:8020/api/v1/product/type/34/
+                name: /type/{id}/
+                meta:
+                  id: req_550edb74c6944b6d8d1fd5500e0409ab
+                  created: 1773658214279
+                  modified: 1773746721021
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1773746712091.5
+                method: DELETE
+                parameters:
+                  - name: name
+                    value: Meiass
+                    description: ""
+                    disabled: false
+                  - name: slug
+                    value: meiass
+                    description: ""
+                    disabled: false
+                  - name: description
+                    value: Pares de meias masculinas e femininas
+                    description: ""
+                    disabled: false
+                  - name: variant_type
+                    value: clothing
+                    description: ""
+                    disabled: false
+                headers:
+                  - name: User-Agent
+                    value: insomnia/12.3.1
+                    description: ""
+                    disabled: false
+                authentication:
+                  type: bearer
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzczNjU4MjI3LCJleHAiOjE3NzM2NjE4MjcsIm5iZiI6MTc3MzY1ODIyNywianRpIjoiSFk3UlJNVjRibzZESTZmSyIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.PLxUkMzVsybwqIthVxqqB191BQuUCrjpxCbjk6kYUOA
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+  - name: API-OPS
+    meta:
+      id: fld_bc2966f1f9e34e8f829f39fd85338b9a
+      created: 1768326150390
+      modified: 1768326176518
+      sortKey: -1767982956386
+      description: ""
+    children:
+      - name: JWT
+        meta:
+          id: fld_47b58c39b5534c7fa79c32d705b34d0e
+          created: 1768326205034
+          modified: 1768326211692
+          sortKey: -1768326211671
+          description: ""
+      - name: Flags
+        meta:
+          id: fld_fb31f704130d4705a5129d5b25ba116f
+          created: 1768396698103
+          modified: 1768396708227
+          sortKey: -1768396698103
+          description: ""
+      - name: Email
+        meta:
+          id: fld_bfb13ed8ef9b4e578207aa0ceedf7042
+          created: 1770723299425
+          modified: 1770723299425
+          sortKey: -1770723299425
+          description: ""
+  - name: API NODEJS
+    meta:
+      id: fld_17dc04aa505f426bbccc9b712a1101c9
+      created: 1769618068575
+      modified: 1769618068575
+      sortKey: -1769618068575
+      description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_540bb22b286640c2953f38caf29f7fe8
+    created: 1740397109528
+    modified: 1773746981205
+  cookies:
+    - id: 7eda1027-ede7-4353-8430-b7ee619004f1
+      key: XSRF-TOKEN
+      value: eyJpdiI6IlRiRlRLSGFWTUhNcGVNMk53dzVJaUE9PSIsInZhbHVlIjoiUUhuamwramY1NzkwNjRreFJUYjQ5Mld2eGU2Nk52bC9QREk1VndrdHpNREZsakhUY1lGR2krcFZtamVVOU9Qa3YwMys2NCsvQlRNaEtIZEp5aFN1QzBFRzZGbm9QUzUxZGhxMU1jVURYRUhGdXhqSWt5UyszRWhOVTU1MFdhK2siLCJtYWMiOiJiYTAxZDhkMWE2NTU0ZWE3YmUwZmY2NTRmMmNlZTAwYjhkYzg2YTUyZjEyZmE1N2FiODlmZWE1Y2M5Y2E2NmI2IiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: 89444342-90cf-4bf2-b20d-1ff596d09a56
+      key: laravel_session
+      value: eyJpdiI6IjM0Wi9jK2d6aGZEcUFXc2VRVDlESGc9PSIsInZhbHVlIjoiWURhN003aDd2SzNJcTZQaDF0cURUcVl0VXM2TkNPdUJWRXFhQnMyWjczdWM4VTZZR1Z0Ylk3TFBTU3A0UDI0N1hNdlZOSEcxQjdEWG9ZY0ZYcnFEZEdPN2xUcTdqd2dWR09CbHVxcU9oajU5WlVYV0NpL2dBc1lnL1ZWTnZERG4iLCJtYWMiOiI5YzI5MjljY2Q4NmY3NzNhNzJmMjRjNTlmMGRjZTQwZTc2MTBmMGQzZjFhMGUzMGIwYjBkYTM1ODlmZWRiOTQyIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+    - id: 23b3d593-7455-46f6-9d64-d1fa4fcb0878
+      key: XSRF-TOKEN
+      value: eyJpdiI6Ik5NUjcvYURTYUhKcW1meVk1aU1GN0E9PSIsInZhbHVlIjoiMzRhTTJ4alU4eUt4M0xvd2xCN0VDYkFMVklaTWVqSG1hSW5GbFU1bVVwUStMb0g5bGFUVzBqczFoU0tjM0tZRTVuQkhYSTZ3WFJDR2s3V2RKUVJmbk9Bc1hCVDRxNnJCaFhHRXRFa2dVRzlLSnArQzRkZGMvRGY5Njk5MWhxR2MiLCJtYWMiOiJhNzljZWNjNTE4NjAwNzZmZmJjYWI2ZDc5MWVlZjg2MjUwMzNlNGU3ZjdjNzI2YzUyNTU5NGQwNDU0ZTllNGU5IiwidGFnIjoiIn0%3D
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: 2537166f-0933-4d98-97f3-c4f2beffda52
+      key: laravel_session
+      value: eyJpdiI6InNWdnR4VnB3VXhVM2tyVkhud2w3SkE9PSIsInZhbHVlIjoiS3I5S0FRcGZSYTR0R1VRV3lnT0tJN21pcDIzTDhUQnhSRW43WlRYN2RkeStIUWNKb0MvbWM2MWdpWEFCY2NyWGpCSlJRY2ltcUdmQ1JYUFVhVDV4ODc5L0NldDVmRnVDNkIyZFB2YzRVQlQwclUzOEtmY09PSjVlczFUR3ZLay8iLCJtYWMiOiI4YThmNzdjNTAxOTVkNDRmMWU1NDEwYjkzYzIzNTQ5MWE1MjI0YzI5MzYxMzU4YWZkMjk5ODU0ZWJkY2I4M2IwIiwidGFnIjoiIn0%3D
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_deffa30c16464cea80c5caaf8bbb7abc
+    created: 1740397109431
+    modified: 1764868341880
+    isPrivate: false
+  data:
+    API_PEDIDOS_LOCAL: http://192.168.99.156/api/pedidos
+    API_REPRESENTANTES_LOCAL: http://192.168.99.156/api/representantes
+    API_PRODUTOS_LOCAL: http://192.168.99.156/api/produtos
