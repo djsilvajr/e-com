@@ -4,21 +4,42 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Exceptions\InvalidParametersException;
 
-class GetProductByIdRequest extends FormRequest
+class CreateProductRequest extends FormRequest
 {
     public function rules()
     {
         return [
-            'id' => ['required', 'integer', 'min:1'],
+            'product_type_id' => ['required', 'integer', 'min:1'],
+            'name' => ['required', 'string', 'max:255'],
+            'sku' => ['nullable', 'string', 'max:255', 'unique:products,sku'],
+            'description' => ['required', 'string'],
+            'short_description' => ['required', 'string', 'max:255'],
+            'brand' => ['nullable', 'string', 'max:255'],
+            'model' => ['nullable', 'string', 'max:255'],
+            'attributes' => ['nullable', 'array'],
+            'avg_weight' => ['nullable', 'numeric'],
+            'avg_dimensions' => ['required', 'array'],
+            'avg_dimensions.width' => ['required', 'numeric'],
+            'avg_dimensions.height' => ['required', 'numeric'],
+            'avg_dimensions.length' => ['required', 'numeric'],
+            'avg_dimensions.unit' => ['required', 'string'],
+            'total_stock' => ['nullable', 'integer'],
+            'min_stock' => ['nullable', 'integer'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string'],
+            'meta_keywords' => ['nullable', 'array'],
+            'active' => ['required', 'boolean'],
+            'is_featured' => ['required', 'boolean'],
+            'is_new' => ['required', 'boolean'],
+            'has_variants' => ['required', 'boolean'],
+            'available_at' => ['required', 'date'],
         ];
     }
 
     /**
-     * Inclui parâmetros da rota (ex: {id}) nos dados que serão validados.
-     * Deve ser public para ser compatível com FormRequest::validationData().
+     * Merge route parameters into validation data.
      */
     public function validationData()
     {
@@ -28,8 +49,7 @@ class GetProductByIdRequest extends FormRequest
     }
 
     /**
-     * Sobrescreve a falha de validação para devolver JSON 422.
-     * Assinatura correta: Illuminate\Contracts\Validation\Validator
+     * Override failed validation to throw domain-specific exception.
      */
     protected function failedValidation(Validator $validator)
     {

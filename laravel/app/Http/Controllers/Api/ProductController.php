@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Services\ProductService;
+use App\Http\Requests\CreateProductRequest;
 
 class ProductController extends Controller
 {
@@ -24,11 +25,57 @@ class ProductController extends Controller
             'message' => 'Product fetched successfully.',
             'errors' => [],
             'data' => $product,
-            'links' => [
-                'self' => url("/v1/product/{$id}"),
-                'delete' => url("/v1/product/{$id}"),
-                'update' => url("/v1/product/{$id}"),
-                'post' => url("/v1/product"),
+            '_links' => [
+                'self' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'GET'
+                ],
+                'create' => [
+                    'href' => url("/v1/product/"),
+                    'method' => 'POST'
+                ],
+                'delete' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'DELETE'
+                ],
+                'update' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'PUT'
+                ],
+            ]
+        ]);
+    }
+
+    public function createProduct(CreateProductRequest $request)
+    {
+        $result = $this->productService->createProduct($request);
+
+        $id = $result['id'] ?? null;
+
+        $data = $result;
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product created successfully.',
+            'errors' => [],
+            'data' => $data,
+            '_links' => [
+                'self' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'GET'
+                ],
+                'create' => [
+                    'href' => url("/v1/product/"),
+                    'method' => 'POST'
+                ],
+                'delete' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'DELETE'
+                ],
+                'update' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'PUT'
+                ],
             ]
         ]);
     }
