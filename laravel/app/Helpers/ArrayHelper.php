@@ -43,4 +43,21 @@ class ArrayHelper
 
         return $newArray;
     }
+
+    public static function findByKey(array $array, string $key, $value): ?array
+    {
+        foreach ($array as $item) {
+            $item = (array) $item;
+            if (isset($item[$key]) && $item[$key] == $value) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    public static function getValue(array $array, string $key, $default = null)
+    {
+        return $array[$key] ?? $default;
+    }
 }

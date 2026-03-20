@@ -36,4 +36,21 @@ class ProductRepository implements ProductInterface
 
         return $created ? $created->toArray() : null;
     }
+
+    public function updateProduct(int $id, array $data)
+    {
+        try {
+            $product = ProductModel::find($id);
+            if (!$product) {
+                return null;
+            }
+
+            $product->fill($data);
+            $product->save();
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $product ? $product->toArray() : null;
+    }
 }
