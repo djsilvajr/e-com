@@ -180,7 +180,7 @@ collection:
             meta:
               id: req_19d1e5c5c7ff4698819851dbea6e92b1
               created: 1767982968826
-              modified: 1768649470866
+              modified: 1774285180961
               isPrivate: false
               description: ""
               sortKey: -1767983909969
@@ -600,6 +600,40 @@ collection:
             authentication:
               type: bearer
               token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzc0MDI4MTI2LCJleHAiOjE3NzQwMzE3MjYsIm5iZiI6MTc3NDAyODEyNiwianRpIjoianlIT212T2w2aTRTTmFRSyIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.QySzDU2WAcdZaqhu3rLHlI5eqpF3x6_vBIvcVRTbZFM
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8020/api/v1/product/1
+            name: /product/{id}
+            meta:
+              id: req_88173401cf3d4b1aa8f7456a3278cd92
+              created: 1774285158288
+              modified: 1774285203960
+              isPrivate: false
+              description: ""
+              sortKey: -1773746691222.375
+            method: DELETE
+            body:
+              mimeType: application/json
+              text: |-
+                {
+
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/12.4.0
+                description: ""
+                disabled: false
+            authentication:
+              type: bearer
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjAvYXBpL2xvZ2luIiwiaWF0IjoxNzc0Mjg1MTg2LCJleHAiOjE3NzQyODg3ODYsIm5iZiI6MTc3NDI4NTE4NiwianRpIjoiZUVINEg1bVJHVUlONzNKayIsInN1YiI6IjEiLCJwcnYiOiJjNzc2MzZhNjU0MTgwZjRiM2ZkMjIyZTRlOGExNWIxOWRhMTk2NzAzIn0.ZDliYAAVUCa6SYVXLGxNOFMjmLLiDcfmdevNOb9aBiI
             settings:
               renderRequestBody: true
               encodeUrl: true

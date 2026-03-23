@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\Product\GetProductById;
 use App\Services\Product\CreateProduct;
 use App\Services\Product\UpdateProduct;
+use App\Services\Product\DeleteProduct;
 
 class ProductService
 {
@@ -12,6 +13,7 @@ class ProductService
         private GetProductById $getProductById,
         private CreateProduct $createProduct,
         private UpdateProduct $updateProduct,
+        private DeleteProduct $deleteProduct,
     ) {}
 
     public function getProductById(int $id)
@@ -27,5 +29,10 @@ class ProductService
     public function updateProduct($id, $request)
     {
         return $this->updateProduct->execute($id, $request);
+    }
+
+    public function deleteProduct($request)
+    {
+        return $this->deleteProduct->execute($request);
     }
 }

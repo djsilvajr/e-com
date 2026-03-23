@@ -6,6 +6,7 @@ use App\Repository\Contracts\ProductInterface;
 use App\Models\ProductModel;
 use App\Exceptions\PersistenceErrorException;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductRepository implements ProductInterface
 {
@@ -52,5 +53,22 @@ class ProductRepository implements ProductInterface
         }
 
         return $product ? $product->toArray() : null;
+    }
+
+    public function softDelete(int $id)
+    {
+        try {
+            $product = ProductModel::find($id);
+            if (!$product) {
+                return null;
+            }
+
+            $product->deleted_at = Carbon::now();
+            $product->save();
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return true;
     }
 }

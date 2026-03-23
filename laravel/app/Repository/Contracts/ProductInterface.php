@@ -8,4 +8,5 @@ interface ProductInterface
     public function findProductBySku(string $sku);
     public function createProduct(array $data);
     public function updateProduct(int $id, array $data);
+    public function softDelete(int $id);
 }

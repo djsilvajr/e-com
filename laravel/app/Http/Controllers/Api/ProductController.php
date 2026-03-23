@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\DeleteProductRequest;
 
 class ProductController extends Controller
 {
@@ -92,6 +93,36 @@ class ProductController extends Controller
             'message' => 'Product updated successfully.',
             'errors' => [],
             'data' => $data,
+            '_links' => [
+                'self' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'GET'
+                ],
+                'create' => [
+                    'href' => url("/v1/product/"),
+                    'method' => 'POST'
+                ],
+                'delete' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'DELETE'
+                ],
+                'update' => [
+                    'href' => url("/v1/product/{$id}"),
+                    'method' => 'PUT'
+                ],
+            ]
+        ]);
+    }
+
+    public function deleteProduct(DeleteProductRequest $request, $id)
+    {
+        $this->productService->deleteProduct($request);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product deleted successfully.',
+            'errors' => [],
+            'data' => null,
             '_links' => [
                 'self' => [
                     'href' => url("/v1/product/{$id}"),
