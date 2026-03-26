@@ -2148,6 +2148,185 @@ paths:
               schema:
                 $ref: '#/definitions/ErrorResponse'
   /api/v1/product/{id}:
+    get:
+      tags:
+        - PRODUCT
+      summary: Get product.
+      description: Get a product by ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product ID to be retrieved.
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Product fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product fetched successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      product_type_id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "Example product name"
+                      sku:
+                        type: string
+                        nullable: true
+                        example: "SKU-001"
+                      description:
+                        type: string
+                      short_description:
+                        type: string
+                      brand:
+                        type: string
+                        nullable: true
+                      model:
+                        type: string
+                        nullable: true
+                      attributes:
+                        type: array
+                        items: {}
+                      avg_weight:
+                        type: number
+                      avg_dimensions:
+                        type: object
+                        properties:
+                          width:
+                            type: number
+                          height:
+                            type: number
+                          length:
+                            type: number
+                          unit:
+                            type: string
+                      total_stock:
+                        type: integer
+                        nullable: true
+                      min_stock:
+                        type: integer
+                        nullable: true
+                      meta_title:
+                        type: string
+                        nullable: true
+                      meta_description:
+                        type: string
+                        nullable: true
+                      meta_keywords:
+                        type: array
+                        items:
+                          type: string
+                      active:
+                        type: boolean
+                      is_featured:
+                        type: boolean
+                      is_new:
+                        type: boolean
+                      has_variants:
+                        type: boolean
+                      available_at:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        example: "2026-02-11 10:25:12"
+                      updated_at:
+                        type: string
+                        example: "2026-02-11 10:25:12"
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product
+                          method:
+                            type: string
+                            example: POST
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: DELETE
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: PUT
+        '404':
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Token not found
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    example: []
     put:
       tags:
         - PRODUCT
