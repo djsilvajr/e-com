@@ -119,6 +119,91 @@ definitions:
       data:
         type: array
         items: {}
+  UpdateProductRequest:
+    type: object
+    required:
+      - product_type_id
+      - name
+      - sku
+      - description
+      - short_description
+      - avg_dimensions
+      - active
+      - is_featured
+      - is_new
+      - has_variants
+      - available_at
+    properties:
+      product_type_id:
+        type: integer
+        minimum: 1
+        example: 1
+      name:
+        type: string
+        maxLength: 255
+        example: "Example product name"
+      sku:
+        type: string
+        maxLength: 255
+        example: "SKU-001"
+      description:
+        type: string
+        example: "Full product description"
+      short_description:
+        type: string
+        maxLength: 255
+        example: "Short description"
+      brand:
+        type: string
+        maxLength: 255
+      model:
+        type: string
+        maxLength: 255
+      attributes:
+        type: array
+        items: {}
+      avg_weight:
+        type: number
+      avg_dimensions:
+        type: object
+        required:
+          - width
+          - height
+          - length
+          - unit
+        properties:
+          width:
+            type: number
+          height:
+            type: number
+          length:
+            type: number
+          unit:
+            type: string
+      total_stock:
+        type: integer
+      min_stock:
+        type: integer
+      meta_title:
+        type: string
+        maxLength: 255
+      meta_description:
+        type: string
+      meta_keywords:
+        type: array
+        items:
+          type: string
+      active:
+        type: boolean
+      is_featured:
+        type: boolean
+      is_new:
+        type: boolean
+      has_variants:
+        type: boolean
+      available_at:
+        type: string
+        format: date
 
 paths:
   /api/login:
@@ -2046,6 +2131,106 @@ paths:
                             example: PUT
         '404':
           description: Product type not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation or business rule error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+  /api/v1/product/{id}:
+    put:
+      tags:
+        - PRODUCT
+      summary: Update product.
+      description: Updates an existing product by ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product ID to update.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/UpdateProductRequest'
+      responses:
+        '200':
+          description: Product updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product updated successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/ProductCreatedData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product
+                          method:
+                            type: string
+                            example: POST
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: DELETE
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/{id}
+                          method:
+                            type: string
+                            example: PUT
+        '404':
+          description: Product or product type not found.
           content:
             application/json:
               schema:

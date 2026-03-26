@@ -150,6 +150,4 @@ Order of trust:
 
 ## Final Goal
 
-Generate Swagger documentation that is **100% faithful to the real endpoint behavior**, minimizing divergence between code and documentation.
-
-Write the changes in swagger.yaml
+Generate Swagger documentation that is **100% faithful to the real endpoint behavior**, minimizing divergence between code and documentation. Changes must be written in swagger.yaml

@@ -21,10 +21,10 @@ You must **update this file** without breaking or removing anything that already
 
 ## Endpoint to Document
 
-POST v1/product
+PUT v1/product
 
 Controller:  
-ProductController@CreateProduct
+ProductController@updateProduct
 
 ---
 
@@ -150,6 +150,4 @@ Order of trust:
 
 ## Final Goal
 
-Generate Swagger documentation that is **100% faithful to the real endpoint behavior**, minimizing divergence between code and documentation.
-
-Write the changes in swagger.yaml
+Generate Swagger documentation that is **100% faithful to the real endpoint behavior**, minimizing divergence between code and documentation. Changes must be written in swagger.yaml
