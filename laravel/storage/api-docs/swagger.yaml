@@ -3,11 +3,12 @@ info:
   title: API
   version: 1.0.0
 
-securityDefinitions:
-  bearerAuth:
-    type: apiKey
-    name: Authorization
-    in: header
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
 definitions:
   CreateProductRequest:
@@ -146,6 +147,10 @@ definitions:
         type: string
         maxLength: 255
         example: "SKU-001"
+      id:
+        type: integer
+        description: "Path parameter merged into validation data; provided in URI"
+        example: 1
       description:
         type: string
         example: "Full product description"
@@ -2146,7 +2151,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ErrorResponse'
+                $ref: '#/definitions/ErrorResponse'   
   /api/v1/product/{id}:
     get:
       tags:
@@ -2426,5 +2431,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/definitions/ErrorResponse'
- 
+    delete:
+      tags:
+        - PRODUCT
+      summary: Delete product
+      description: Soft deletes a product by its ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product ID to be deleted.
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      responses:
+        "200":
+          description: Product deleted successfully.
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Product deleted successfully."
+                errors: []
+                data: []
+                _links:
+                  self:
+                    href: "/api/v1/product/{id}"
+        "404":
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        "422":
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
   
