@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "required": ["method", "uri", "controller"],
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": ["GET", "POST", "PUT", "DELETE"]
+    },
+    "uri": {
+      "type": "string"
+    },
+    "controller": {
+      "type": "string"
+    },
+    "request": {
+      "type": "string"
+    }
+  }
+}
