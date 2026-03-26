@@ -21,10 +21,10 @@ You must **update this file** without breaking or removing anything that already
 
 ## Endpoint to Document
 
-{{METHOD}} {{URI}}
+POST va/product
 
 Controller:  
-{{CONTROLLER}}@{{METHOD}}
+ProductController@CreateProduct
 
 ---
 
