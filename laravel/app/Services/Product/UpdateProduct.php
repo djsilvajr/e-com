@@ -12,6 +12,7 @@ use App\Exceptions\ResourceNotFoundException;
 use App\Exceptions\BusinessRuleException;
 use App\Exceptions\PersistenceErrorException;
 use App\Helpers\ArrayHelper;
+use Carbon\Carbon;
 
 class UpdateProduct
 {
@@ -29,7 +30,6 @@ class UpdateProduct
         $data = is_array($request) ? $request : $request->all();
         $productTypeId = $data['product_type_id'] ?? null;
         $sku = $data['sku'] ?? null;
-        $availableAt = $data['available_at'] ?? null;
 
         if (!$id) {
             throw new ResourceNotFoundException('Product id not provided', []);
@@ -52,10 +52,10 @@ class UpdateProduct
             if ($originalProductId != $id) {
                 throw new BusinessRuleException('Product with same SKU already exists', ['sku' => $sku]);
             }
+            $data['available_at'] = ArrayHelper::getValue($existing, 'available_at') ?? Carbon::now()->toIso8601ZuluString();
         }
 
         $this->productMustNotBeDeleted->validate($product);
-        $this->availableAtRule->validate($availableAt);
 
         //Product Type
         $productType = $this->productTypeRepository->findProductTypeById((int) $productTypeId);
