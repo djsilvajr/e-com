@@ -1,5 +1,9 @@
 # Task: Create Endpoint
 
+##context
+Read and follow API patterns in llm/context/api-patterns.md
+Read and follow API architecture in llm/context/architecture.md
+
 ## Project DIR
 - laravel
 
