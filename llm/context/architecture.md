@@ -48,6 +48,7 @@ DO NOT:
 - Orchestrates Interfaces / Repository
 - Can call multiple Interfaces / Repository
 - MUST return structured data or return exception if an error
+- DO NOT Call different domains
 
 ---
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductTypeController;
 use App\Http\Controllers\Api\CacheController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductPriceController;
 
 //login
 Route::post('/login', [AuthController::class, 'login']);
@@ -37,6 +38,12 @@ Route::middleware('api.stack')->group(function () {
     Route::put('v1/product/{id}', [ProductController::class, 'updateProduct']);
     Route::get('v1/product/{id}', [ProductController::class, 'getProductById']);
     Route::delete('v1/product/{id}', [ProductController::class, 'deleteProduct']);
+
+    //Product Price
+    Route::get('v1/product/{product_id}/price', [ProductPriceController::class, 'getPrice']);
+    Route::post('v1/product/{product_id}/price', [ProductPriceController::class, 'addPrice']);
+    Route::put('v1/product/{product_id}/price', [ProductPriceController::class, 'updatePrice']);
+    Route::delete('v1/product/{product_id}/price', [ProductPriceController::class, 'deletePrice']);
 });
 
 

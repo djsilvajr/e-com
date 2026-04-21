@@ -55,7 +55,7 @@ class CreateProduct
 
         $this->productTypeMustNotBeDeleted->validate($productTypeFirstValue);
         $this->productTypeNeedAParent->validate($productTypeFirstValue);
-        $this->availableAtRule->validate($availableAt);
+        //$this->availableAtRule->validate($availableAt);
 
         $created = $this->productRepository->createProduct($data);
 
