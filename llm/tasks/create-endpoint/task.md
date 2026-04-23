@@ -8,52 +8,82 @@ Read and follow API architecture in llm/context/architecture.md
 - laravel
 
 ## Endpoint
-GET v1/product/{product_id}/price/
-POST v1/product/{product_id}/price/
-PUT  v1/product/{product_id}/price/
-DELETE v1/product/{product_id}/price/
+GET v1/product/{product_id}/variant/{id}
+POST v1/product/{product_id}/variant/
+PUT  v1/product/{product_id}/variant/{id}
+DELETE v1/product/{product_id}/variant/{id}
 
 ## Controller
-ProductPriceController
+ProductVariantController
 
 ## Request
-GET v1/product/{product_id}/price/ - GetPriceRequest
-POST v1/product/{product_id}/price/ - AddPriceRequest
-PUT  v1/product/{product_id}/price/ - UpdatePriceRequest
-DELETE v1/product/{product_id}/price/ - DeletePriceRequest
+GET v1/product/{product_id}/variant/{id} - GetProductVariantRequest
+POST v1/product/{product_id}/variant/ - AddProductVariantRequest
+PUT  v1/product/{product_id}/variant/{id} - UpdateProductVariantRequest
+DELETE v1/product/{product_id}/variant/{id} - DeleteProductVariantRequest
 
 ## Validation
 Use rules defined in /llm/rules/validation.md
 
+
+POST
 Rules:
-- field: required | string | max:255
 - product_id: required | int
-- best_price: DECIMAL(10,2)
-- cost_price: DECIMAL(10,2)
-- proft_margin: DECIMAL(10,2)
-- promotional_price: DECIMAL(10,2)
-- promotional_starts_at: TIMESTAMP
-- promotional_ends_at: TIMESTAMP
-- currency: BRL pattern
-- tax_rate: DECIMAL(5,2)
+- sku: required | unique | max:255 | string
+- name: required | string | max:255
+- barcode: required | string | max:255 | unique
+- variant_type: ENUM 'clothing','electronics','furniture','simple' (already exists an enum variant type class to the product)
+- price_adjustment: DECIMAL(10,2)
+- stock: int 
+- reserved_stock: int
+- min_stock: int
+- weight: DECIMAL(8,2)
+- dimensions: Json | can be null but only saves on database like {"altura": 90, "largura": 220, "profundidade": 95}
+
+
+PUT 
+- id: int 
+- product_id: required | int
+- sku: required | unique | max:255 | string
+- name: required | string | max:255
+- barcode: required | string | max:255 | unique
+- variant_type: ENUM 'clothing','electronics','furniture','simple' (already exists an enum variant type class to the product)
+- price_adjustment: DECIMAL(10,2)
+- stock: int 
+- reserved_stock: int
+- min_stock: int
+- weight: DECIMAL(8,2)
+- dimensions: Json | can be null but only saves on database like {"altura": 90, "largura": 220, "profundidade": 95}
+- order: int (based on product_id)
+- active: tinyint (0 or 1)
+
 
 created_at and updated_at exists.
 
 ## Business Rules
 GET RULES
 product_id must be valid and exist in database
+id from variant must be valid and exist in database
 
 POST RULES
 product_id must be valid and exist in database
-Currency needs to be BRL
-if price already exists to the product can not create other (create price rule)
+sku needs to be unique verify in variant/products table
+barcode needs to be unique verify in variant/products table
+variant_type should be valid based on enum
+dimensions when sended aways will save this json pattern in database {"altura": {value_x}, "largura": {value_y}, "profundidade": {value_z}}
 
 PUT
 product_id must be valid and exist in database
-Currency needs to be BRL
+sku needs to be unique verify in variant/products table
+barcode needs to be unique verify in variant/products table
+variant_type should be valid based on enum
+dimensions when sended aways will save this json pattern in database {"altura": {value_x}, "largura": {value_y}, "profundidade": {value_z}}
+id from variant must be valid and exist in database
+order should be unique based on product_id, if send a duplicated one the order must be changed from both variants affected
 
 DELETE
-product_id must be valid and exist in database
+id from variant must be valid and exist in database
+
 
 ## Flow
 {{FLOW}}
@@ -108,34 +138,46 @@ Rules:
 
 
 the table we are working on:
-price:
+product_variants:
 
-CREATE TABLE `prices` (
+
+CREATE TABLE `product_variants` (
 	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`product_id` BIGINT UNSIGNED NOT NULL,
-	`base_price` DECIMAL(10,2) NOT NULL,
-	`cost_price` DECIMAL(10,2) NULL DEFAULT NULL,
-	`profit_margin` DECIMAL(5,2) NULL DEFAULT NULL,
-	`promotional_price` DECIMAL(10,2) NULL DEFAULT NULL,
-	`promotional_starts_at` TIMESTAMP NULL DEFAULT NULL,
-	`promotional_ends_at` TIMESTAMP NULL DEFAULT NULL,
-	`compare_at_price` DECIMAL(10,2) NULL DEFAULT NULL,
-	`currency` VARCHAR(3) NOT NULL DEFAULT 'BRL' COLLATE 'utf8mb4_unicode_ci',
-	`tax_rate` DECIMAL(5,2) NULL DEFAULT NULL,
+	`sku` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`barcode` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`variant_type` ENUM('clothing','electronics','furniture','simple') NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`price_adjustment` DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+	`stock` INT NOT NULL DEFAULT '0',
+	`reserved_stock` INT NOT NULL DEFAULT '0',
+	`min_stock` INT NOT NULL DEFAULT '0',
+	`weight` DECIMAL(8,2) NULL DEFAULT NULL,
+	`dimensions` JSON NULL DEFAULT NULL,
+	`image_url` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`order` INT NOT NULL DEFAULT '0',
+	`active` TINYINT(1) NOT NULL DEFAULT '1',
+	`is_default` TINYINT(1) NOT NULL DEFAULT '0',
 	`created_at` TIMESTAMP NULL DEFAULT NULL,
 	`updated_at` TIMESTAMP NULL DEFAULT NULL,
+	`deleted_at` TIMESTAMP NULL DEFAULT NULL,
 	PRIMARY KEY (`id`) USING BTREE,
-	UNIQUE INDEX `prices_product_id_unique` (`product_id`) USING BTREE,
-	INDEX `prices_product_id_index` (`product_id`) USING BTREE,
-	INDEX `prices_promotional_ends_at_index` (`promotional_ends_at`) USING BTREE,
-	INDEX `prices_base_price_promotional_price_index` (`base_price`, `promotional_price`) USING BTREE,
-	CONSTRAINT `prices_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+	UNIQUE INDEX `product_variants_sku_unique` (`sku`) USING BTREE,
+	UNIQUE INDEX `product_variants_barcode_unique` (`barcode`) USING BTREE,
+	INDEX `product_variants_product_id_index` (`product_id`) USING BTREE,
+	INDEX `product_variants_sku_index` (`sku`) USING BTREE,
+	INDEX `product_variants_barcode_index` (`barcode`) USING BTREE,
+	INDEX `product_variants_variant_type_index` (`variant_type`) USING BTREE,
+	INDEX `product_variants_product_id_variant_type_index` (`product_id`, `variant_type`) USING BTREE,
+	INDEX `product_variants_product_id_active_index` (`product_id`, `active`) USING BTREE,
+	INDEX `product_variants_active_stock_index` (`active`, `stock`) USING BTREE,
+	INDEX `product_variants_product_id_is_default_index` (`product_id`, `is_default`) USING BTREE,
+	CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 )
 COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=9
+AUTO_INCREMENT=22
 ;
-
 
 product:
 
@@ -178,5 +220,3 @@ COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=9
 ;
-
-

@@ -8,11 +8,13 @@ use App\Repository\Contracts\FeatureFlagInterface;
 use App\Repository\Contracts\ProductTypeInterface;
 use App\Repository\Contracts\ProductInterface;
 use App\Repository\Contracts\PriceInterface;
+use App\Repository\Contracts\ProductVariantInterface;
 use App\Repository\UserRepository;
 use App\Repository\FeatureFlagRepository;
 use App\Repository\ProductTypeRepository;
 use App\Repository\ProductRepository;
 use App\Repository\PriceRepository;
+use App\Repository\ProductVariantRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductTypeInterface::class, ProductTypeRepository::class);
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(PriceInterface::class, PriceRepository::class);
+        $this->app->bind(ProductVariantInterface::class, ProductVariantRepository::class);
     }
 
     /**

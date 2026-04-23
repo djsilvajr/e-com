@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ProductTypeController;
 use App\Http\Controllers\Api\CacheController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductPriceController;
+use App\Http\Controllers\Api\ProductVariantController;
 
 //login
 Route::post('/login', [AuthController::class, 'login']);
@@ -44,6 +45,12 @@ Route::middleware('api.stack')->group(function () {
     Route::post('v1/product/{product_id}/price', [ProductPriceController::class, 'addPrice']);
     Route::put('v1/product/{product_id}/price', [ProductPriceController::class, 'updatePrice']);
     Route::delete('v1/product/{product_id}/price', [ProductPriceController::class, 'deletePrice']);
+
+    //Product Variant
+    Route::get('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'getVariant']);
+    Route::post('v1/product/{product_id}/variant', [ProductVariantController::class, 'addVariant']);
+    Route::put('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'updateVariant']);
+    Route::delete('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'deleteVariant']);
 });
 
 

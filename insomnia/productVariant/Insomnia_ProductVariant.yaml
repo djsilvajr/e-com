@@ -1,0 +1,193 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: e-com - Product Variant
+meta:
+  id: wrk_productvariant_0000000000000001
+  created: 1777000000000
+  modified: 1777000000000
+  description: "Endpoints CRUD de Product Variant"
+collection:
+  - name: Product Variant
+    meta:
+      id: fld_productvariant_root_00000000001
+      created: 1777000000000
+      modified: 1777000000000
+      sortKey: -1777000000000
+      description: ""
+    children:
+      - url: http://localhost:8020/api/v1/product/1/variant/1
+        name: GET /product/{product_id}/variant/{id}
+        meta:
+          id: req_productvariant_get_000000000001
+          created: 1777000000001
+          modified: 1777000000001
+          isPrivate: false
+          description: "Busca uma variante especifica do produto"
+          sortKey: -1777000000001
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.jwt_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+
+      - url: http://localhost:8020/api/v1/product/1/variant
+        name: POST /product/{product_id}/variant
+        meta:
+          id: req_productvariant_post_00000000001
+          created: 1777000000002
+          modified: 1777000000002
+          isPrivate: false
+          description: "Cria uma nova variante para o produto"
+          sortKey: -1777000000002
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "sku": "CB-ALG-0003-VAR-001",
+              "name": "Camiseta Básica Algodão - P - Preta",
+              "barcode": "7891234567001",
+              "variant_type": "clothing",
+              "price_adjustment": 0.00,
+              "stock": 50,
+              "reserved_stock": 0,
+              "min_stock": 5,
+              "weight": 0.25,
+              "dimensions": {
+                "altura": 90,
+                "largura": 220,
+                "profundidade": 95
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Accept
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.jwt_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+
+      - url: http://localhost:8020/api/v1/product/1/variant/1
+        name: PUT /product/{product_id}/variant/{id}
+        meta:
+          id: req_productvariant_put_000000000001
+          created: 1777000000003
+          modified: 1777000000003
+          isPrivate: false
+          description: "Atualiza uma variante do produto"
+          sortKey: -1777000000003
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "sku": "CB-ALG-0003-VAR-001",
+              "name": "Camiseta Básica Algodão - P - Preta",
+              "barcode": "7891234567001",
+              "variant_type": "clothing",
+              "price_adjustment": 5.00,
+              "stock": 80,
+              "reserved_stock": 2,
+              "min_stock": 10,
+              "weight": 0.25,
+              "dimensions": {
+                "altura": 90,
+                "largura": 220,
+                "profundidade": 95
+              },
+              "order": 1,
+              "active": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Accept
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.jwt_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+
+      - url: http://localhost:8020/api/v1/product/1/variant/1
+        name: DELETE /product/{product_id}/variant/{id}
+        meta:
+          id: req_productvariant_delete_0000000001
+          created: 1777000000004
+          modified: 1777000000004
+          isPrivate: false
+          description: "Remove uma variante do produto"
+          sortKey: -1777000000004
+        method: DELETE
+        headers:
+          - name: Accept
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.jwt_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_productvariant_000000000000000001
+    created: 1777000000000
+    modified: 1777000000000
+  cookies: []
+environments:
+  name: Base Environment
+  meta:
+    id: env_productvariant_0000000000000001
+    created: 1777000000000
+    modified: 1777000000000
+    isPrivate: false
+  data:
+    base_url: http://localhost:8020/api
+    jwt_token: ""
