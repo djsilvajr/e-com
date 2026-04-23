@@ -3,42 +3,58 @@
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
 
 
 class LoginController extends Controller
 {
-    public function loginView() 
+    public function loginView()
     {
         if (Auth::guard('web')->check()) {
             return redirect()->route('welcome');
-        } else {
-            return view('login/login');
         }
+
+        return view('login/login');
     }
 
     public function loginAttempt(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email'    => ['required', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:1', 'max:255'],
+            'remember' => ['nullable', 'boolean'],
+        ], [
+            'email.required'    => 'E-mail é obrigatório.',
+            'email.email'       => 'Informe um e-mail válido.',
+            'password.required' => 'Senha é obrigatória.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('login')
+                ->withErrors($validator)
+                ->withInput($request->only('email', 'remember'));
+        }
+
         $credentials = [
-            'email' => $request->email ?? '', 
-            'password' => $request->password ?? '',
+            'email'    => (string) $request->input('email', ''),
+            'password' => (string) $request->input('password', ''),
         ];
 
-        LoginRequest::validate($credentials);
+        $remember = (bool) $request->boolean('remember');
 
-        if (Auth::guard('web')->attempt([
-            'email' => $credentials['email'], 
-            'password' => $credentials['password'], 
-        ])) {
+        if (Auth::guard('web')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->route('welcome');
-
-        } else {
-            return view('login/login', ['error' => 'INVALID CREDENTIALS.']);
+            return redirect()->intended(route('welcome'));
         }
+
+        return redirect()
+            ->route('login')
+            ->withInput($request->only('email', 'remember'))
+            ->with('error', 'E-mail ou senha incorretos.');
     }
 
     public function logout(Request $request)
