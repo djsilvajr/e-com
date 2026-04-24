@@ -210,6 +210,396 @@ definitions:
         type: string
         format: date
 
+  AddPriceRequest:
+    type: object
+    required:
+      - base_price
+      - currency
+    properties:
+      base_price:
+        type: number
+        format: float
+        minimum: 0
+        example: 99.90
+      cost_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 49.50
+      profit_margin:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 50.00
+      promotional_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 79.90
+      promotional_starts_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-11 00:00:00"
+      promotional_ends_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-28 23:59:59"
+      compare_at_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 129.90
+      currency:
+        type: string
+        pattern: "^BRL$"
+        example: "BRL"
+      tax_rate:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 5.00
+  UpdatePriceRequest:
+    type: object
+    properties:
+      base_price:
+        type: number
+        format: float
+        minimum: 0
+        example: 99.90
+      cost_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 49.50
+      profit_margin:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 50.00
+      promotional_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 79.90
+      promotional_starts_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-11 00:00:00"
+      promotional_ends_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-28 23:59:59"
+      compare_at_price:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 129.90
+      currency:
+        type: string
+        pattern: "^BRL$"
+        example: "BRL"
+      tax_rate:
+        type: number
+        format: float
+        nullable: true
+        minimum: 0
+        example: 5.00
+  PriceData:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      product_id:
+        type: integer
+        example: 1
+      base_price:
+        type: string
+        example: "99.90"
+      cost_price:
+        type: string
+        nullable: true
+        example: "49.50"
+      profit_margin:
+        type: string
+        nullable: true
+        example: "50.00"
+      promotional_price:
+        type: string
+        nullable: true
+        example: "79.90"
+      promotional_starts_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-11T00:00:00.000000Z"
+      promotional_ends_at:
+        type: string
+        format: date-time
+        nullable: true
+        example: "2026-02-28T23:59:59.000000Z"
+      compare_at_price:
+        type: string
+        nullable: true
+        example: "129.90"
+      currency:
+        type: string
+        example: "BRL"
+      tax_rate:
+        type: string
+        nullable: true
+        example: "5.00"
+      created_at:
+        type: string
+        example: "2026-02-11 10:25:12"
+      updated_at:
+        type: string
+        example: "2026-02-11 10:25:12"
+  AddProductVariantRequest:
+    type: object
+    required:
+      - sku
+      - name
+      - barcode
+      - variant_type
+    properties:
+      sku:
+        type: string
+        maxLength: 255
+        example: "SKU-VAR-001"
+      name:
+        type: string
+        maxLength: 255
+        example: "Azul - M"
+      barcode:
+        type: string
+        maxLength: 255
+        example: "7891234567890"
+      variant_type:
+        type: string
+        enum:
+          - clothing
+          - electronics
+          - furniture
+          - books
+          - simple
+        example: "clothing"
+      price_adjustment:
+        type: number
+        format: float
+        nullable: true
+        example: 5.00
+      stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 10
+      reserved_stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 0
+      min_stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 1
+      weight:
+        type: number
+        format: float
+        nullable: true
+        example: 0.50
+      dimensions:
+        type: object
+        nullable: true
+        required:
+          - altura
+          - largura
+          - profundidade
+        properties:
+          altura:
+            type: number
+            example: 10
+          largura:
+            type: number
+            example: 20
+          profundidade:
+            type: number
+            example: 5
+  UpdateProductVariantRequest:
+    type: object
+    required:
+      - sku
+      - name
+      - barcode
+      - variant_type
+    properties:
+      sku:
+        type: string
+        maxLength: 255
+        example: "SKU-VAR-001"
+      name:
+        type: string
+        maxLength: 255
+        example: "Azul - M"
+      barcode:
+        type: string
+        maxLength: 255
+        example: "7891234567890"
+      variant_type:
+        type: string
+        enum:
+          - clothing
+          - electronics
+          - furniture
+          - books
+          - simple
+        example: "clothing"
+      price_adjustment:
+        type: number
+        format: float
+        nullable: true
+        example: 5.00
+      stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 10
+      reserved_stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 0
+      min_stock:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 1
+      weight:
+        type: number
+        format: float
+        nullable: true
+        example: 0.50
+      dimensions:
+        type: object
+        nullable: true
+        required:
+          - altura
+          - largura
+          - profundidade
+        properties:
+          altura:
+            type: number
+            example: 10
+          largura:
+            type: number
+            example: 20
+          profundidade:
+            type: number
+            example: 5
+      order:
+        type: integer
+        minimum: 0
+        nullable: true
+        example: 1
+      active:
+        type: boolean
+        nullable: true
+        example: true
+  ProductVariantData:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      product_id:
+        type: integer
+        example: 1
+      sku:
+        type: string
+        example: "SKU-VAR-001"
+      name:
+        type: string
+        nullable: true
+        example: "Azul - M"
+      barcode:
+        type: string
+        nullable: true
+        example: "7891234567890"
+      variant_type:
+        type: string
+        enum:
+          - clothing
+          - electronics
+          - furniture
+          - simple
+        example: "clothing"
+      price_adjustment:
+        type: string
+        example: "5.00"
+      stock:
+        type: integer
+        example: 10
+      reserved_stock:
+        type: integer
+        example: 0
+      min_stock:
+        type: integer
+        example: 1
+      weight:
+        type: string
+        nullable: true
+        example: "0.50"
+      dimensions:
+        type: object
+        nullable: true
+        properties:
+          altura:
+            type: number
+            example: 10
+          largura:
+            type: number
+            example: 20
+          profundidade:
+            type: number
+            example: 5
+      image_url:
+        type: string
+        nullable: true
+        example: null
+      order:
+        type: integer
+        example: 0
+      active:
+        type: boolean
+        example: true
+      is_default:
+        type: boolean
+        example: false
+      created_at:
+        type: string
+        example: "2026-02-11 10:25:12"
+      updated_at:
+        type: string
+        example: "2026-02-11 10:25:12"
+      deleted_at:
+        type: string
+        nullable: true
+        example: null
+
 paths:
   /api/login:
     post:
@@ -2472,4 +2862,853 @@ paths:
             application/json:
               schema:
                 $ref: '#/definitions/ErrorResponse'
-  
+
+  # Product Price
+  /api/v1/product/{product_id}/price:
+    get:
+      tags:
+        - PRODUCT PRICE
+      summary: Get product price
+      description: Retrieves the price record associated with the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID whose price should be retrieved.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Price fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Price fetched successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/PriceData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or price not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+    post:
+      tags:
+        - PRODUCT PRICE
+      summary: Create product price
+      description: Creates a new price record for the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID to associate the price with.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/AddPriceRequest'
+      responses:
+        '201':
+          description: Price created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Price created successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/PriceData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error or business rule violation (e.g., currency must be BRL, price already exists).
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - PRODUCT PRICE
+      summary: Update product price
+      description: Updates the price record associated with the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID whose price should be updated.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/UpdatePriceRequest'
+      responses:
+        '200':
+          description: Price updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Price updated successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/PriceData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or price not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error or business rule violation (e.g., currency must be BRL).
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - PRODUCT PRICE
+      summary: Delete product price
+      description: Deletes the price record associated with the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID whose price should be deleted.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Price deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Price deleted successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    nullable: true
+                    example: null
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/price
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or price not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+
+  # Product Variant
+  /api/v1/product/{product_id}/variant:
+    post:
+      tags:
+        - PRODUCT VARIANT
+      summary: Create product variant
+      description: Creates a new product variant for the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID to associate the variant with.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/AddProductVariantRequest'
+      responses:
+        '201':
+          description: Product variant created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product variant created successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/ProductVariantData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '409':
+          description: Duplicate detected (e.g., SKU or barcode already in use).
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error or business rule violation (e.g., invalid variant type).
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+
+  /api/v1/product/{product_id}/variant/{id}:
+    get:
+      tags:
+        - PRODUCT VARIANT
+      summary: Get product variant
+      description: Retrieves a product variant by ID for the given product.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: id
+          in: path
+          required: true
+          description: Product variant ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Product variant fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product variant fetched successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/ProductVariantData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or variant not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - PRODUCT VARIANT
+      summary: Update product variant
+      description: Updates a product variant by ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: id
+          in: path
+          required: true
+          description: Product variant ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/UpdateProductVariantRequest'
+      responses:
+        '200':
+          description: Product variant updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product variant updated successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    $ref: '#/definitions/ProductVariantData'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or variant not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '409':
+          description: Duplicate detected (e.g., SKU or barcode already in use).
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error or business rule violation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - PRODUCT VARIANT
+      summary: Delete product variant
+      description: Deletes a product variant by ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Product ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: id
+          in: path
+          required: true
+          description: Product variant ID.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Product variant deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product variant deleted successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    nullable: true
+                    example: null
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/
+                          method:
+                            type: string
+                            example: POST
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: PUT
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: /api/v1/product/1/variant/1
+                          method:
+                            type: string
+                            example: DELETE
+        '404':
+          description: Product or variant not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Persistence or unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized. Bearer token is missing, expired, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ErrorResponse'
