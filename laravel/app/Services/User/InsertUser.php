@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Services\User;
 
-use App\Events\UserRegisteredSendEmail;
-use App\Repository\Contracts\UserRepositoryInterface;
-use App\Repository\Contracts\FeatureFlagInterface;
+use App\Events\User\UserRegisteredSendEmailEvent;
 use App\Exceptions\PersistenceErrorException;
+use App\Repository\Contracts\FeatureFlagInterface;
+use App\Repository\Contracts\UserRepositoryInterface;
 use App\Services\User\Ensures\EnsureEmailIsAvailable;
 
 class InsertUser
@@ -12,15 +15,19 @@ class InsertUser
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private FeatureFlagInterface $featureFlagRepository,
-        private EnsureEmailIsAvailable $ensureEmailIsAvailable
+        private EnsureEmailIsAvailable $ensureEmailIsAvailable,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $credentials
+     * @return array<string, mixed>
+     */
     public function execute(array $credentials): array
     {
         $this->ensureEmailIsAvailable->validate($credentials['email']);
 
         $addition = $this->userRepository->insertUser($credentials);
-        $userId = $addition['id'] ?? null;
+        $userId   = $addition['id'] ?? null;
 
         if (!$userId) {
             throw new PersistenceErrorException();
@@ -31,13 +38,13 @@ class InsertUser
         }
 
         if ($this->featureFlagRepository->isEnabled('email_send_enabled')) {
-            event(new UserRegisteredSendEmail($userId, $addition['email'], $addition['name']));
+            event(new UserRegisteredSendEmailEvent($userId, $addition['email'], $addition['name']));
         }
 
         return [
-            'id' => $userId,
-            'name' => $addition['name'],
-            'email' => $addition['email']
+            'id'    => $userId,
+            'name'  => $addition['name'],
+            'email' => $addition['email'],
         ];
     }
 }

@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Events;
+declare(strict_types=1);
+
+namespace App\Events\User;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisteredSendEmail
+class UserRegisteredSendEmailEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
         public int $id,
         public string $email,
-        public string $name
+        public string $name,
     ) {}
 }

@@ -1,6 +1,6 @@
 # Architecture
 
-## Pattern
+# API route Pattern
 
 Controller → Service → UseCase → Interface / Repository
 
@@ -83,3 +83,31 @@ DO NOT:
 ## Goal
 
 Ensure strict separation of concerns, consistency, and predictability across the codebase.
+
+
+# Event Queue pattern
+
+Service Call event -> Event runs in app/event/{domain}/{event} -> Listener detects event based on EventServiceProvider -> Listener add event on queue IN app/Jobs/Queue/{Domain}/{Job} -> Job Calls service -> calls service case
+
+---
+
+
+## Flow Rules (CRITICAL)
+
+WHEN A EVENT IS CREATED
+
+- Service Calls Event
+- Listener registered in EventServiceProvider Listen the event 
+- Listener adds a queue job
+- job calls Service
+- Service Calls use case
+
+DO NOT:
+- Skip layers
+- Put business logic outside UseCase
+
+---
+
+## Business Rules
+
+- Service Must follow the same pattern as api calls
