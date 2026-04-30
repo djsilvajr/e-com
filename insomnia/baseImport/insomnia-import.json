@@ -1,0 +1,3680 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-04-30T00:00:00.000Z",
+  "__export_source": "claude.cowork:insomnia-import-generator",
+  "resources": [
+    {
+      "_id": "wrk_ecom_api",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "E-com API",
+      "description": "Coleção gerada a partir das rotas Laravel (routes/api.php)",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_ecom_base",
+      "_type": "environment",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8000/api",
+        "token": "SEU_TOKEN_AQUI",
+        "id": 1,
+        "user_id": 1,
+        "product_id": 1,
+        "product_type_id": 1,
+        "variant_id": 1,
+        "cache_key": "exemplo-chave"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "token",
+          "id",
+          "user_id",
+          "product_id",
+          "product_type_id",
+          "variant_id",
+          "cache_key"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1777570148494
+    },
+    {
+      "_id": "jar_ecom",
+      "_type": "cookie_jar",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "Default Jar",
+      "cookies": []
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "AUTH",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1
+    },
+    {
+      "_id": "fld_auth_login",
+      "_type": "request_group",
+      "parentId": "fld_auth",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST /login",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -2
+    },
+    {
+      "_id": "req_auth_login_success",
+      "_type": "request",
+      "parentId": "fld_auth_login",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/login",
+      "name": "success",
+      "description": "200 OK — retorna o token de acesso.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Senha123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -3,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_auth_login_validation",
+      "_type": "request",
+      "parentId": "fld_auth_login",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/login",
+      "name": "validation error",
+      "description": "400 Bad Request — Email/Password obrigatórios.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -4,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_auth_login_unauthorized",
+      "_type": "request",
+      "parentId": "fld_auth_login",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/login",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — credenciais inválidas.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"senhaerrada\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_auth_logout",
+      "_type": "request_group",
+      "parentId": "fld_auth",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST /logout",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -6
+    },
+    {
+      "_id": "req_auth_logout_success",
+      "_type": "request",
+      "parentId": "fld_auth_logout",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/logout",
+      "name": "success",
+      "description": "200 OK — token revogado.",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -7,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_auth_logout_unauth",
+      "_type": "request",
+      "parentId": "fld_auth_logout",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/logout",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — sem token.",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -8,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_auth_self",
+      "_type": "request_group",
+      "parentId": "fld_auth",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET /user/self",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -9
+    },
+    {
+      "_id": "req_auth_self_success",
+      "_type": "request",
+      "parentId": "fld_auth_self",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/user/self",
+      "name": "success",
+      "description": "200 OK — retorna usuário autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -10,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_auth_self_unauth",
+      "_type": "request",
+      "parentId": "fld_auth_self",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/user/self",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — sem token.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -11,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_user",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "USER",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -12
+    },
+    {
+      "_id": "fld_user_post",
+      "_type": "request_group",
+      "parentId": "fld_user",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST v1/user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -13
+    },
+    {
+      "_id": "req_user_post_success",
+      "_type": "request",
+      "parentId": "fld_user_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user",
+      "name": "success",
+      "description": "201 Created — usuário criado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@example.com\",\n  \"password\": \"Senha123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -14,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_post_validation",
+      "_type": "request",
+      "parentId": "fld_user_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user",
+      "name": "validation error",
+      "description": "400 Bad Request — campos inválidos.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"email\": \"invalid-email\",\n  \"password\": \"123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -15,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_post_unauth",
+      "_type": "request",
+      "parentId": "fld_user_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — sem token.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João\",\n  \"email\": \"joao@example.com\",\n  \"password\": \"Senha123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -16,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_user_get_id",
+      "_type": "request_group",
+      "parentId": "fld_user",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/user/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -17
+    },
+    {
+      "_id": "req_user_get_success",
+      "_type": "request",
+      "parentId": "fld_user_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "success",
+      "description": "200 OK — retorna o usuário.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -18,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_get_notfound",
+      "_type": "request",
+      "parentId": "fld_user_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/999999",
+      "name": "not found",
+      "description": "404 Not Found — id inexistente.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -19,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_get_unauth",
+      "_type": "request",
+      "parentId": "fld_user_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — sem token.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -20,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_user_put_id",
+      "_type": "request_group",
+      "parentId": "fld_user",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PUT v1/user/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -21
+    },
+    {
+      "_id": "req_user_put_success",
+      "_type": "request",
+      "parentId": "fld_user_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "success",
+      "description": "200 OK — usuário atualizado.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.atual@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -22,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_put_notfound",
+      "_type": "request",
+      "parentId": "fld_user_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/999999",
+      "name": "not found",
+      "description": "404 Not Found — id inexistente.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Inexistente\",\n  \"email\": \"x@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -23,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_put_validation",
+      "_type": "request",
+      "parentId": "fld_user_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "validation error",
+      "description": "400 Bad Request — campos inválidos.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"email\": \"invalid\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -24,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_put_unauth",
+      "_type": "request",
+      "parentId": "fld_user_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized — sem token.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"X\",\n  \"email\": \"x@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_user_delete_id",
+      "_type": "request_group",
+      "parentId": "fld_user",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE v1/user/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -26
+    },
+    {
+      "_id": "req_user_delete_success",
+      "_type": "request",
+      "parentId": "fld_user_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "success",
+      "description": "200 OK — usuário removido. Requer permissão user.delete.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -27,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_user_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/999999",
+      "name": "not found",
+      "description": "404 Not Found — id inexistente.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -28,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_user_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "unauthorized",
+      "description": "401/403 — sem token ou sem permissão user.delete.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -29,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_user_patch_id",
+      "_type": "request_group",
+      "parentId": "fld_user",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PATCH v1/user/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -30
+    },
+    {
+      "_id": "req_user_patch_success",
+      "_type": "request",
+      "parentId": "fld_user_patch_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "success",
+      "description": "200 OK — campos parciais atualizados.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Apenas Nome Alterado\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -31,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_patch_notfound",
+      "_type": "request",
+      "parentId": "fld_user_patch_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"X\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -32,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_patch_validation",
+      "_type": "request",
+      "parentId": "fld_user_patch_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "validation error",
+      "description": "400 Bad Request — email inválido.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"email-invalido\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -33,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_user_patch_unauth",
+      "_type": "request",
+      "parentId": "fld_user_patch_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/user/{{ _.user_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"X\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -34,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_cache",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "CACHE",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -35
+    },
+    {
+      "_id": "fld_cache_post",
+      "_type": "request_group",
+      "parentId": "fld_cache",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST /cache",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -36
+    },
+    {
+      "_id": "req_cache_post_success",
+      "_type": "request",
+      "parentId": "fld_cache_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache",
+      "name": "success",
+      "description": "201 Created — chave armazenada.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"key\": \"{{ _.cache_key }}\",\n  \"value\": \"valor-de-exemplo\",\n  \"ttl\": 3600\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -37,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_post_validation",
+      "_type": "request",
+      "parentId": "fld_cache_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache",
+      "name": "validation error",
+      "description": "400 Bad Request — key obrigatória.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"key\": \"\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -38,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_post_unauth",
+      "_type": "request",
+      "parentId": "fld_cache_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"key\": \"x\",\n  \"value\": \"y\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -39,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_cache_get_key",
+      "_type": "request_group",
+      "parentId": "fld_cache",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET /cache/{key}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -40
+    },
+    {
+      "_id": "req_cache_get_success",
+      "_type": "request",
+      "parentId": "fld_cache_get_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/{{ _.cache_key }}",
+      "name": "success",
+      "description": "200 OK — retorna o valor armazenado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -41,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_get_notfound",
+      "_type": "request",
+      "parentId": "fld_cache_get_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/chave-inexistente",
+      "name": "not found",
+      "description": "404 Not Found — chave não existe ou expirou.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -42,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_get_unauth",
+      "_type": "request",
+      "parentId": "fld_cache_get_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/{{ _.cache_key }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -43,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_cache_delete_key",
+      "_type": "request_group",
+      "parentId": "fld_cache",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE /cache/{key}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -44
+    },
+    {
+      "_id": "req_cache_delete_success",
+      "_type": "request",
+      "parentId": "fld_cache_delete_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/{{ _.cache_key }}",
+      "name": "success",
+      "description": "200 OK — chave removida.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -45,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_cache_delete_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/chave-inexistente",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -46,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cache_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_cache_delete_key",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/cache/{{ _.cache_key }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -47,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_product_type",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PRODUCT_TYPE",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -48
+    },
+    {
+      "_id": "fld_ptype_list",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/types",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -49
+    },
+    {
+      "_id": "req_ptype_list_success",
+      "_type": "request",
+      "parentId": "fld_ptype_list",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/types",
+      "name": "success",
+      "description": "200 OK — lista de tipos de produto.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -50,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_list_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_list",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/types",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -51,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_ptype_get_id",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/type/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -52
+    },
+    {
+      "_id": "req_ptype_get_success",
+      "_type": "request",
+      "parentId": "fld_ptype_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}",
+      "name": "success",
+      "description": "200 OK — retorna o tipo de produto.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -53,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_get_notfound",
+      "_type": "request",
+      "parentId": "fld_ptype_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -54,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_get_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -55,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_ptype_get_child",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/type/{id}/child",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -56
+    },
+    {
+      "_id": "req_ptype_child_success",
+      "_type": "request",
+      "parentId": "fld_ptype_get_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/child",
+      "name": "success",
+      "description": "200 OK — lista de filhos.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -57,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_child_notfound",
+      "_type": "request",
+      "parentId": "fld_ptype_get_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/999999/child",
+      "name": "not found",
+      "description": "404 Not Found — pai inexistente.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -58,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_child_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_get_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/child",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -59,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_ptype_post_child",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST v1/product/type/{id}/child",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -60
+    },
+    {
+      "_id": "req_ptype_child_post_success",
+      "_type": "request",
+      "parentId": "fld_ptype_post_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/child",
+      "name": "success",
+      "description": "201 Created — subtipo criado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Subtipo de Exemplo\",\n  \"slug\": \"subtipo-de-exemplo\",\n  \"description\": \"Descrição do subtipo\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -61,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_child_post_validation",
+      "_type": "request",
+      "parentId": "fld_ptype_post_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/child",
+      "name": "validation error",
+      "description": "400 Bad Request — name/slug obrigatórios.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"slug\": \"\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -62,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_child_post_notfound",
+      "_type": "request",
+      "parentId": "fld_ptype_post_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/999999/child",
+      "name": "not found",
+      "description": "404 Not Found — id pai inexistente.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"x\",\n  \"slug\": \"x\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -63,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_child_post_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_post_child",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/child",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"x\",\n  \"slug\": \"x\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -64,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_ptype_patch_status",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PATCH v1/product/type/{id}/status",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -65
+    },
+    {
+      "_id": "req_ptype_status_success",
+      "_type": "request",
+      "parentId": "fld_ptype_patch_status",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/status",
+      "name": "success",
+      "description": "200 OK — status alterado (TRUE/FALSE).",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"TRUE\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -66,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_status_validation",
+      "_type": "request",
+      "parentId": "fld_ptype_patch_status",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/status",
+      "name": "validation error",
+      "description": "400 Bad Request — status deve ser TRUE ou FALSE.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"INVALIDO\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -67,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_status_notfound",
+      "_type": "request",
+      "parentId": "fld_ptype_patch_status",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/999999/status",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"TRUE\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -68,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_status_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_patch_status",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/status",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"TRUE\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -69,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_ptype_delete_id",
+      "_type": "request_group",
+      "parentId": "fld_product_type",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE v1/product/type/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -70
+    },
+    {
+      "_id": "req_ptype_delete_success",
+      "_type": "request",
+      "parentId": "fld_ptype_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/",
+      "name": "success",
+      "description": "200 OK — tipo removido.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -71,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_ptype_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/999999/",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -72,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_ptype_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_ptype_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/type/{{ _.product_type_id }}/",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -73,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_product",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PRODUCT",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -74
+    },
+    {
+      "_id": "fld_product_post",
+      "_type": "request_group",
+      "parentId": "fld_product",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST v1/product",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -75
+    },
+    {
+      "_id": "req_product_post_success",
+      "_type": "request",
+      "parentId": "fld_product_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product",
+      "name": "success",
+      "description": "201 Created — produto criado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"product_type_id\": 1,\n  \"name\": \"Tinta Acrílica Premium\",\n  \"sku\": \"TINTA-ACR-001\",\n  \"description\": \"Tinta acrílica premium de alta cobertura.\",\n  \"short_description\": \"Acrílica premium 18L\",\n  \"brand\": \"Tintas Brazilian\",\n  \"model\": \"Premium\",\n  \"attributes\": {\n    \"cor\": \"branco\",\n    \"acabamento\": \"fosco\"\n  },\n  \"avg_weight\": 22.5,\n  \"avg_dimensions\": {\n    \"width\": 30,\n    \"height\": 40,\n    \"length\": 30,\n    \"unit\": \"cm\"\n  },\n  \"total_stock\": 100,\n  \"min_stock\": 10,\n  \"meta_title\": \"Tinta Acrílica Premium 18L\",\n  \"meta_description\": \"Compre tinta acrílica premium online.\",\n  \"meta_keywords\": [\n    \"tinta\",\n    \"acrílica\",\n    \"premium\"\n  ],\n  \"active\": true,\n  \"is_featured\": true,\n  \"is_new\": true,\n  \"has_variants\": false,\n  \"available_at\": \"2026-01-01\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -76,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_post_validation",
+      "_type": "request",
+      "parentId": "fld_product_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product",
+      "name": "validation error",
+      "description": "400 Bad Request — campos inválidos/ausentes.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"active\": \"talvez\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -77,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_post_unauth",
+      "_type": "request",
+      "parentId": "fld_product_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"product_type_id\": 1,\n  \"name\": \"Tinta Acrílica Premium\",\n  \"sku\": \"TINTA-ACR-001\",\n  \"description\": \"Tinta acrílica premium de alta cobertura.\",\n  \"short_description\": \"Acrílica premium 18L\",\n  \"brand\": \"Tintas Brazilian\",\n  \"model\": \"Premium\",\n  \"attributes\": {\n    \"cor\": \"branco\",\n    \"acabamento\": \"fosco\"\n  },\n  \"avg_weight\": 22.5,\n  \"avg_dimensions\": {\n    \"width\": 30,\n    \"height\": 40,\n    \"length\": 30,\n    \"unit\": \"cm\"\n  },\n  \"total_stock\": 100,\n  \"min_stock\": 10,\n  \"meta_title\": \"Tinta Acrílica Premium 18L\",\n  \"meta_description\": \"Compre tinta acrílica premium online.\",\n  \"meta_keywords\": [\n    \"tinta\",\n    \"acrílica\",\n    \"premium\"\n  ],\n  \"active\": true,\n  \"is_featured\": true,\n  \"is_new\": true,\n  \"has_variants\": false,\n  \"available_at\": \"2026-01-01\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -78,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_product_put_id",
+      "_type": "request_group",
+      "parentId": "fld_product",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PUT v1/product/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -79
+    },
+    {
+      "_id": "req_product_put_success",
+      "_type": "request",
+      "parentId": "fld_product_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "success",
+      "description": "200 OK — produto atualizado.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"product_type_id\": 1,\n  \"name\": \"Tinta Acrílica Premium\",\n  \"sku\": \"TINTA-ACR-001\",\n  \"description\": \"Tinta acrílica premium de alta cobertura.\",\n  \"short_description\": \"Acrílica premium 18L\",\n  \"brand\": \"Tintas Brazilian\",\n  \"model\": \"Premium\",\n  \"attributes\": {\n    \"cor\": \"branco\",\n    \"acabamento\": \"fosco\"\n  },\n  \"avg_weight\": 22.5,\n  \"avg_dimensions\": {\n    \"width\": 30,\n    \"height\": 40,\n    \"length\": 30,\n    \"unit\": \"cm\"\n  },\n  \"total_stock\": 100,\n  \"min_stock\": 10,\n  \"meta_title\": \"Tinta Acrílica Premium 18L\",\n  \"meta_description\": \"Compre tinta acrílica premium online.\",\n  \"meta_keywords\": [\n    \"tinta\",\n    \"acrílica\",\n    \"premium\"\n  ],\n  \"active\": true,\n  \"is_featured\": true,\n  \"is_new\": true,\n  \"has_variants\": false,\n  \"available_at\": \"2026-01-01\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -80,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_put_notfound",
+      "_type": "request",
+      "parentId": "fld_product_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"product_type_id\": 1,\n  \"name\": \"Tinta Acrílica Premium\",\n  \"sku\": \"TINTA-ACR-001\",\n  \"description\": \"Tinta acrílica premium de alta cobertura.\",\n  \"short_description\": \"Acrílica premium 18L\",\n  \"brand\": \"Tintas Brazilian\",\n  \"model\": \"Premium\",\n  \"attributes\": {\n    \"cor\": \"branco\",\n    \"acabamento\": \"fosco\"\n  },\n  \"avg_weight\": 22.5,\n  \"avg_dimensions\": {\n    \"width\": 30,\n    \"height\": 40,\n    \"length\": 30,\n    \"unit\": \"cm\"\n  },\n  \"total_stock\": 100,\n  \"min_stock\": 10,\n  \"meta_title\": \"Tinta Acrílica Premium 18L\",\n  \"meta_description\": \"Compre tinta acrílica premium online.\",\n  \"meta_keywords\": [\n    \"tinta\",\n    \"acrílica\",\n    \"premium\"\n  ],\n  \"active\": true,\n  \"is_featured\": true,\n  \"is_new\": true,\n  \"has_variants\": false,\n  \"available_at\": \"2026-01-01\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -81,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_put_validation",
+      "_type": "request",
+      "parentId": "fld_product_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "validation error",
+      "description": "400 Bad Request.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -82,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_put_unauth",
+      "_type": "request",
+      "parentId": "fld_product_put_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"product_type_id\": 1,\n  \"name\": \"Tinta Acrílica Premium\",\n  \"sku\": \"TINTA-ACR-001\",\n  \"description\": \"Tinta acrílica premium de alta cobertura.\",\n  \"short_description\": \"Acrílica premium 18L\",\n  \"brand\": \"Tintas Brazilian\",\n  \"model\": \"Premium\",\n  \"attributes\": {\n    \"cor\": \"branco\",\n    \"acabamento\": \"fosco\"\n  },\n  \"avg_weight\": 22.5,\n  \"avg_dimensions\": {\n    \"width\": 30,\n    \"height\": 40,\n    \"length\": 30,\n    \"unit\": \"cm\"\n  },\n  \"total_stock\": 100,\n  \"min_stock\": 10,\n  \"meta_title\": \"Tinta Acrílica Premium 18L\",\n  \"meta_description\": \"Compre tinta acrílica premium online.\",\n  \"meta_keywords\": [\n    \"tinta\",\n    \"acrílica\",\n    \"premium\"\n  ],\n  \"active\": true,\n  \"is_featured\": true,\n  \"is_new\": true,\n  \"has_variants\": false,\n  \"available_at\": \"2026-01-01\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -83,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_product_get_id",
+      "_type": "request_group",
+      "parentId": "fld_product",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -84
+    },
+    {
+      "_id": "req_product_get_success",
+      "_type": "request",
+      "parentId": "fld_product_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "success",
+      "description": "200 OK — retorna o produto.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -85,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_get_notfound",
+      "_type": "request",
+      "parentId": "fld_product_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -86,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_get_unauth",
+      "_type": "request",
+      "parentId": "fld_product_get_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -87,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_product_delete_id",
+      "_type": "request_group",
+      "parentId": "fld_product",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE v1/product/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -88
+    },
+    {
+      "_id": "req_product_delete_success",
+      "_type": "request",
+      "parentId": "fld_product_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "success",
+      "description": "200 OK — produto removido.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -89,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_product_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -90,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_product_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_product_delete_id",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -91,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_price",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PRICE",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -92
+    },
+    {
+      "_id": "fld_price_get",
+      "_type": "request_group",
+      "parentId": "fld_price",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/{product_id}/price",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -93
+    },
+    {
+      "_id": "req_price_get_success",
+      "_type": "request",
+      "parentId": "fld_price_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "success",
+      "description": "200 OK — retorna o preço atual.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -94,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_get_notfound",
+      "_type": "request",
+      "parentId": "fld_price_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999/price",
+      "name": "not found",
+      "description": "404 Not Found — produto sem preço/inexistente.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -95,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_get_unauth",
+      "_type": "request",
+      "parentId": "fld_price_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -96,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_price_post",
+      "_type": "request_group",
+      "parentId": "fld_price",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST v1/product/{product_id}/price",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -97
+    },
+    {
+      "_id": "req_price_post_success",
+      "_type": "request",
+      "parentId": "fld_price_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "success",
+      "description": "201 Created — preço cadastrado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 199.9,\n  \"cost_price\": 110.0,\n  \"profit_margin\": 45.0,\n  \"promotional_price\": 179.9,\n  \"promotional_starts_at\": \"2026-05-01\",\n  \"promotional_ends_at\": \"2026-05-31\",\n  \"compare_at_price\": 219.9,\n  \"currency\": \"BRL\",\n  \"tax_rate\": 18.0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -98,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_post_validation",
+      "_type": "request",
+      "parentId": "fld_price_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "validation error",
+      "description": "400 Bad Request — base_price/currency inválidos.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": -1,\n  \"currency\": \"USD\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -99,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_post_notfound",
+      "_type": "request",
+      "parentId": "fld_price_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999/price",
+      "name": "not found",
+      "description": "404 Not Found — produto inexistente.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 199.9,\n  \"cost_price\": 110.0,\n  \"profit_margin\": 45.0,\n  \"promotional_price\": 179.9,\n  \"promotional_starts_at\": \"2026-05-01\",\n  \"promotional_ends_at\": \"2026-05-31\",\n  \"compare_at_price\": 219.9,\n  \"currency\": \"BRL\",\n  \"tax_rate\": 18.0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_post_unauth",
+      "_type": "request",
+      "parentId": "fld_price_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 199.9,\n  \"cost_price\": 110.0,\n  \"profit_margin\": 45.0,\n  \"promotional_price\": 179.9,\n  \"promotional_starts_at\": \"2026-05-01\",\n  \"promotional_ends_at\": \"2026-05-31\",\n  \"compare_at_price\": 219.9,\n  \"currency\": \"BRL\",\n  \"tax_rate\": 18.0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -101,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_price_put",
+      "_type": "request_group",
+      "parentId": "fld_price",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PUT v1/product/{product_id}/price",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -102
+    },
+    {
+      "_id": "req_price_put_success",
+      "_type": "request",
+      "parentId": "fld_price_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "success",
+      "description": "200 OK — preço atualizado.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 209.9,\n  \"currency\": \"BRL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -103,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_put_validation",
+      "_type": "request",
+      "parentId": "fld_price_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "validation error",
+      "description": "400 Bad Request — base_price inválido.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": \"abc\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -104,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_put_notfound",
+      "_type": "request",
+      "parentId": "fld_price_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999/price",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 100.0,\n  \"currency\": \"BRL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -105,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_put_unauth",
+      "_type": "request",
+      "parentId": "fld_price_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"base_price\": 100.0,\n  \"currency\": \"BRL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -106,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_price_delete",
+      "_type": "request_group",
+      "parentId": "fld_price",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE v1/product/{product_id}/price",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -107
+    },
+    {
+      "_id": "req_price_delete_success",
+      "_type": "request",
+      "parentId": "fld_price_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "success",
+      "description": "200 OK — preço removido.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -108,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_price_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999/price",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -109,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_price_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_price_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/price",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -110,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_variant",
+      "_type": "request_group",
+      "parentId": "wrk_ecom_api",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "VARIANT",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -111
+    },
+    {
+      "_id": "fld_variant_get",
+      "_type": "request_group",
+      "parentId": "fld_variant",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "GET v1/product/{product_id}/variant/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -112
+    },
+    {
+      "_id": "req_variant_get_success",
+      "_type": "request",
+      "parentId": "fld_variant_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "success",
+      "description": "200 OK — retorna a variante.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -113,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_get_notfound",
+      "_type": "request",
+      "parentId": "fld_variant_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/999999",
+      "name": "not found",
+      "description": "404 Not Found — variante inexistente.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -114,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_get_unauth",
+      "_type": "request",
+      "parentId": "fld_variant_get",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -115,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_variant_post",
+      "_type": "request_group",
+      "parentId": "fld_variant",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "POST v1/product/{product_id}/variant",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -116
+    },
+    {
+      "_id": "req_variant_post_success",
+      "_type": "request",
+      "parentId": "fld_variant_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant",
+      "name": "success",
+      "description": "201 Created — variante criada.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -117,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_post_validation",
+      "_type": "request",
+      "parentId": "fld_variant_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant",
+      "name": "validation error",
+      "description": "400 Bad Request — sku/name/barcode/variant_type inválidos.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"\",\n  \"name\": \"\",\n  \"barcode\": \"\",\n  \"variant_type\": \"INEXISTENTE\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -118,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_post_notfound",
+      "_type": "request",
+      "parentId": "fld_variant_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/999999/variant",
+      "name": "not found",
+      "description": "404 Not Found — produto inexistente.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -119,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_post_unauth",
+      "_type": "request",
+      "parentId": "fld_variant_post",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -120,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_variant_put",
+      "_type": "request_group",
+      "parentId": "fld_variant",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "PUT v1/product/{product_id}/variant/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -121
+    },
+    {
+      "_id": "req_variant_put_success",
+      "_type": "request",
+      "parentId": "fld_variant_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "success",
+      "description": "200 OK — variante atualizada.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  },\n  \"order\": 1,\n  \"active\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -122,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_put_validation",
+      "_type": "request",
+      "parentId": "fld_variant_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "validation error",
+      "description": "400 Bad Request — campos obrigatórios ausentes.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"\",\n  \"name\": \"\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -123,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_put_notfound",
+      "_type": "request",
+      "parentId": "fld_variant_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -124,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_put_unauth",
+      "_type": "request",
+      "parentId": "fld_variant_put",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sku\": \"VARIANTE-001\",\n  \"name\": \"Variante Cor Branco 18L\",\n  \"barcode\": \"7891234567890\",\n  \"variant_type\": \"COLOR\",\n  \"price_adjustment\": 5.0,\n  \"stock\": 50,\n  \"reserved_stock\": 0,\n  \"min_stock\": 5,\n  \"weight\": 22.5,\n  \"dimensions\": {\n    \"altura\": 40,\n    \"largura\": 30,\n    \"profundidade\": 30\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -125,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_variant_delete",
+      "_type": "request_group",
+      "parentId": "fld_variant",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "name": "DELETE v1/product/{product_id}/variant/{id}",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -126
+    },
+    {
+      "_id": "req_variant_delete_success",
+      "_type": "request",
+      "parentId": "fld_variant_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "success",
+      "description": "200 OK — variante removida.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -127,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_delete_notfound",
+      "_type": "request",
+      "parentId": "fld_variant_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/999999",
+      "name": "not found",
+      "description": "404 Not Found.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -128,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_variant_delete_unauth",
+      "_type": "request",
+      "parentId": "fld_variant_delete",
+      "modified": 1777570148494,
+      "created": 1777570148494,
+      "url": "{{ _.base_url }}/v1/product/{{ _.product_id }}/variant/{{ _.variant_id }}",
+      "name": "unauthorized",
+      "description": "401 Unauthorized.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -129,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    }
+  ]
+}
