@@ -13,31 +13,31 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->updateOrInsert(
-            ['email' => 't3stemail3nvio01@gmail.com'],[
-            'name' => 'Administrator',
-            'email' => 't3stemail3nvio01@gmail.com',
-            'password' => Hash::make('Test@1234'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // DB::table('users')->updateOrInsert(
+        //     ['email' => 't3stemail3nvio01@gmail.com'],[
+        //     'name' => 'Administrator',
+        //     'email' => 't3stemail3nvio01@gmail.com',
+        //     'password' => Hash::make('Test@1234'),
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        DB::table('users')->updateOrInsert(
-            ['email' => 't3stemail3nvio01@gmail.com'],[
-            'name' => 'Administrator',
-            'email' => 't3stemail3nvio01@gmail.com',
-            'password' => Hash::make('Test@1234'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // DB::table('users')->updateOrInsert(
+        //     ['email' => 't3stemail3nvio01@gmail.com'],[
+        //     'name' => 'Administrator',
+        //     'email' => 't3stemail3nvio01@gmail.com',
+        //     'password' => Hash::make('Test@1234'),
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        DB::table('users')->updateOrInsert(
-            ['email' => 't3stemail3nvio01@gmail.com'],[
-            'name' => 'Administrator',
-            'email' => 't3stemail3nvio01@gmail.com',
-            'password' => Hash::make('Test@1234'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // DB::table('users')->updateOrInsert(
+        //     ['email' => 't3stemail3nvio01@gmail.com'],[
+        //     'name' => 'Administrator',
+        //     'email' => 't3stemail3nvio01@gmail.com',
+        //     'password' => Hash::make('Test@1234'),
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
     }
 }
