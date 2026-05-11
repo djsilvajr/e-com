@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Storefront\StorefrontHomeController;
 use App\Http\Controllers\Web\Admin\AdminLoginController;
 use App\Http\Controllers\Web\Admin\AdminDashboardController;
+use App\Http\Controllers\Web\Admin\AdminProductTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,5 +70,24 @@ Route::prefix('admin')->group(function () use ($webPublic) {
     Route::middleware(['web.stack', 'web.permission:admin'])->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+        /*
+        | Product Types administration
+        */
+        Route::prefix('product')->group(function () {
+            Route::get('/types', [AdminProductTypeController::class, 'index'])->name('admin.types.index');
+            Route::get('/types/{id}', [AdminProductTypeController::class, 'show'])
+                ->whereNumber('id')
+                ->name('admin.types.show');
+            Route::post('/types/{id}/child', [AdminProductTypeController::class, 'store'])
+                ->whereNumber('id')
+                ->name('admin.types.store');
+            Route::patch('/types/{id}/status', [AdminProductTypeController::class, 'toggleStatus'])
+                ->whereNumber('id')
+                ->name('admin.types.toggle-status');
+            Route::delete('/types/{id}', [AdminProductTypeController::class, 'destroy'])
+                ->whereNumber('id')
+                ->name('admin.types.destroy');
+        });
     });
 });

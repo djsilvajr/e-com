@@ -24,7 +24,7 @@
 
     <div class="ui bottom attached segment" style="padding: 2em;">
         <h2 class="ui header">Bem-vindo(a) ao admin</h2>
-        <p>Use o menu para gerenciar produtos, variantes, preços e categorias.</p>
+        <p>Use o menu para gerenciar produtos, tipos de produto, preços e categorias.</p>
 
         <div class="ui four stackable cards">
             <a href="#" class="ui card">
@@ -45,10 +45,10 @@
                     <div class="description">Atualizar valores</div>
                 </div>
             </a>
-            <a href="#" class="ui card">
+            <a href="{{ route('admin.types.index') }}" class="ui card">
                 <div class="content">
-                    <div class="header"><i class="copy icon"></i> Variantes</div>
-                    <div class="description">Gerenciar variantes de produto</div>
+                    <div class="header"><i class="tags icon"></i> Tipos de produtos</div>
+                    <div class="description">Gerenciar tipos de produto</div>
                 </div>
             </a>
         </div>
