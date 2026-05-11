@@ -2,6 +2,9 @@
 
 @section('title', 'Login - Admin')
 
+{{-- Login page has no header / user area since the user is not authenticated yet. --}}
+@section('without-chrome', 'true')
+
 @section('content')
 <div class="ui middle aligned center aligned grid" style="min-height: calc(100vh - 4em); margin: 0;">
     <div class="column" style="max-width: 450px;">

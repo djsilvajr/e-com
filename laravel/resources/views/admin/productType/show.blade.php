@@ -51,224 +51,275 @@
 @endpush
 
 @section('content')
-<div class="ui container">
-    <div class="ui top attached inverted menu" style="border-radius: 0;">
-        <a class="item" href="{{ route('admin.types.index') }}">
-            <i class="arrow left icon"></i> Tipos de produtos
-        </a>
+<div class="admin-page-header">
+    <div class="ui breadcrumb">
+        <a class="section" href="{{ route('admin.dashboard') }}" data-loading>Dashboard</a>
+        <i class="right angle icon divider"></i>
+        <a class="section" href="{{ route('admin.types.index') }}" data-loading>Tipos de produtos</a>
         @if (!empty($grandparentId))
-            <a class="item" href="{{ route('admin.types.show', ['id' => $grandparentId]) }}" data-loading>
+            <i class="right angle icon divider"></i>
+            <a class="section" href="{{ route('admin.types.show', ['id' => $grandparentId]) }}" data-loading>Tipo pai</a>
+        @endif
+        <i class="right angle icon divider"></i>
+        <div class="active section">{{ $parentName ?: 'Tipo de produto' }}</div>
+    </div>
+
+    <div class="page-actions">
+        @if (!empty($grandparentId))
+            <a href="{{ route('admin.types.show', ['id' => $grandparentId]) }}" class="ui small button" data-loading>
                 <i class="level up alternate icon"></i> Tipo pai
             </a>
         @endif
-        <div class="header item">
-            <i class="tags icon"></i> {{ $parentName ?: 'Tipo de produto' }}
-        </div>
-        <div class="right menu">
-            <div class="item">
-                <i class="user icon"></i>
-                {{ \Illuminate\Support\Facades\Auth::guard('web')->user()->name ?? '' }}
-            </div>
-            <form action="{{ route('admin.logout') }}" method="POST" style="margin: 0;">
-                @csrf
-                <button type="submit" class="ui item" style="background: transparent; border: 0; color: #fff; cursor: pointer;">
-                    <i class="sign-out icon"></i> Sair
-                </button>
-            </form>
-        </div>
+        <a href="{{ route('admin.types.index') }}" class="ui small button" data-loading>
+            <i class="arrow left icon"></i> Voltar à lista
+        </a>
     </div>
+</div>
 
-    <div class="ui bottom attached segment" style="padding: 2em;">
-        <h2 class="ui header">
-            <i class="folder open icon"></i>
-            <div class="content">
-                {{ $parentName }}
-                <div class="sub header">
-                    Slug: <code>{{ $productType['slug'] ?? '' }}</code>
-                    @if (!empty($parentVariantType))
-                        &middot; Variante: <code>{{ $parentVariantType }}</code>
-                    @endif
-                </div>
+<div class="admin-section">
+    <h2 class="ui header">
+        <i class="folder open icon"></i>
+        <div class="content">
+            {{ $parentName }}
+            <div class="sub header">
+                Slug: <code>{{ $productType['slug'] ?? '' }}</code>
+                @if ($parentVariantType !== '')
+                    &middot; Variante: <code>{{ $parentVariantType }}</code>
+                @endif
             </div>
-        </h2>
+        </div>
+    </h2>
 
-        @if (!empty($productType['description']))
-            <p>{{ $productType['description'] }}</p>
-        @endif
+    @if (!empty($productType['description']))
+        <p>{{ $productType['description'] }}</p>
+    @endif
 
-        @if (session('success'))
-            <div class="ui positive message">
-                <i class="close icon"></i>
-                <div class="header">{{ session('success') }}</div>
+    @if (session('success'))
+        <div class="ui positive message">
+            <i class="close icon"></i>
+            <div class="header">{{ session('success') }}</div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">{{ session('error') }}</div>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <ul class="list" style="text-align: left;">
+                @foreach ($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <h3 class="ui header">
+        <i class="list icon"></i>
+        <div class="content">
+            Sub-tipos
+            <span class="count-badge" id="children-count">{{ count($childProductTypes) }}</span>
+            <div class="sub header">Filhos cadastrados sob este tipo. Clique em "Sub-tipos" para descer na hierarquia.</div>
+        </div>
+    </h3>
+
+    @if (empty($childProductTypes))
+        <div class="ui info message">
+            <div class="header">Nenhum sub-tipo cadastrado ainda.</div>
+            <p>Use o formulário abaixo para criar o primeiro.</p>
+        </div>
+    @else
+        <div class="ui admin-toolbar">
+            <div class="ui icon input">
+                <input
+                    id="children-search"
+                    type="text"
+                    placeholder="Pesquisar sub-tipos por nome, slug ou variante..."
+                    autocomplete="off"
+                >
+                <i class="search icon"></i>
             </div>
-        @endif
-
-        @if (session('error'))
-            <div class="ui negative message">
-                <i class="close icon"></i>
-                <div class="header">{{ session('error') }}</div>
+            <div class="page-size-select">
+                <label for="children-page-size">Por página:</label>
+                <select id="children-page-size">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="0">Todos</option>
+                </select>
             </div>
-        @endif
+            <div class="toolbar-info" id="children-info"></div>
+        </div>
 
-        @if ($errors->any())
-            <div class="ui negative message">
-                <i class="close icon"></i>
-                <ul class="list" style="text-align: left;">
-                    @foreach ($errors->all() as $message)
-                        <li>{{ $message }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <h3 class="ui header">
-            <i class="list icon"></i>
-            <div class="content">
-                Sub-tipos
-                <div class="sub header">Filhos cadastrados sob este tipo. Clique em "Sub-tipos" para descer na hierarquia.</div>
-            </div>
-        </h3>
-
-        @if (empty($childProductTypes))
-            <div class="ui info message">
-                <div class="header">Nenhum sub-tipo cadastrado ainda.</div>
-                <p>Use o formulário abaixo para criar o primeiro.</p>
-            </div>
-        @else
-            <div class="types-table-wrapper">
-                <table class="ui celled striped table">
-                    <thead>
-                        <tr>
-                            <th style="width: 60px;">ID</th>
-                            <th>Nome</th>
-                            <th style="width: 160px;">Variante</th>
-                            <th style="width: 100px;">Status</th>
-                            <th style="width: 1px;">Ações</th>
+        <div class="types-table-wrapper">
+            <table
+                class="ui celled striped table js-paginated-table"
+                data-page-size="10"
+                data-search="#children-search"
+                data-info="#children-info"
+                data-pagination="#children-pagination"
+                data-empty="#children-empty"
+                data-page-size-select="#children-page-size"
+                data-count-badge="#children-count"
+            >
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">ID</th>
+                        <th>Nome</th>
+                        <th style="width: 160px;">Variante</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 1px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($childProductTypes as $child)
+                        @php
+                            $child = is_object($child) ? (array) $child : $child;
+                            $childActive = (bool) ($child['active'] ?? false);
+                            $childVariant = (string) ($child['variant_type'] ?? '');
+                            $childVariantLabel = $childVariant !== ''
+                                ? ($variantTypes[$childVariant] ?? $childVariant)
+                                : '';
+                            $childSearchText = trim(
+                                ($child['name'] ?? '') . ' ' .
+                                ($child['slug'] ?? '') . ' ' .
+                                ($child['description'] ?? '') . ' ' .
+                                $childVariant . ' ' .
+                                $childVariantLabel
+                            );
+                        @endphp
+                        <tr data-search-text="{{ \Illuminate\Support\Str::lower($childSearchText) }}">
+                            <td>{{ $child['id'] ?? '' }}</td>
+                            <td>
+                                <strong>{{ $child['name'] ?? '' }}</strong>
+                                <div class="ui small text" style="color: #666;">
+                                    <code>{{ $child['slug'] ?? '' }}</code>
+                                </div>
+                            </td>
+                            <td>
+                                @if ($childVariant !== '')
+                                    <span class="ui basic label">{{ $childVariantLabel }}</span>
+                                @else
+                                    <span style="color:#999;">&mdash;</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($childActive)
+                                    <span class="ui green label">Ativo</span>
+                                @else
+                                    <span class="ui grey label">Inativo</span>
+                                @endif
+                            </td>
+                            <td class="types-actions-cell">
+                                <div class="action-buttons">
+                                    <a
+                                        href="{{ route('admin.types.show', ['id' => $child['id']]) }}"
+                                        class="ui small primary button"
+                                        data-loading
+                                    >
+                                        <i class="folder open icon"></i> Sub-tipos
+                                    </a>
+                                    <form action="{{ route('admin.types.toggle-status', ['id' => $child['id']]) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="status" value="{{ $childActive ? 'FALSE' : 'TRUE' }}">
+                                        <button type="submit" class="ui small {{ $childActive ? 'orange' : 'green' }} button">
+                                            <i class="power off icon"></i>
+                                            {{ $childActive ? 'Desativar' : 'Ativar' }}
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.types.destroy', ['id' => $child['id']]) }}" method="POST" onsubmit="return confirm('Remover este sub-tipo?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="ui small red button">
+                                            <i class="trash icon"></i> Remover
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($childProductTypes as $child)
-                            @php
-                                $child = is_object($child) ? (array) $child : $child;
-                                $childActive = (bool) ($child['active'] ?? false);
-                            @endphp
-                            <tr>
-                                <td>{{ $child['id'] ?? '' }}</td>
-                                <td>
-                                    <strong>{{ $child['name'] ?? '' }}</strong>
-                                    <div class="ui small text" style="color: #666;">
-                                        <code>{{ $child['slug'] ?? '' }}</code>
-                                    </div>
-                                </td>
-                                <td>
-                                    @if (!empty($child['variant_type']))
-                                        <span class="ui basic label">{{ $child['variant_type'] }}</span>
-                                    @else
-                                        &mdash;
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($childActive)
-                                        <span class="ui green label">Ativo</span>
-                                    @else
-                                        <span class="ui grey label">Inativo</span>
-                                    @endif
-                                </td>
-                                <td class="types-actions-cell">
-                                    <div class="action-buttons">
-                                        <a
-                                            href="{{ route('admin.types.show', ['id' => $child['id']]) }}"
-                                            class="ui small primary button"
-                                            data-loading
-                                        >
-                                            <i class="folder open icon"></i> Sub-tipos
-                                        </a>
-                                        <form action="{{ route('admin.types.toggle-status', ['id' => $child['id']]) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="status" value="{{ $childActive ? 'FALSE' : 'TRUE' }}">
-                                            <button type="submit" class="ui small {{ $childActive ? 'orange' : 'green' }} button">
-                                                <i class="power off icon"></i>
-                                                {{ $childActive ? 'Desativar' : 'Ativar' }}
-                                            </button>
-                                        </form>
-                                        <form action="{{ route('admin.types.destroy', ['id' => $child['id']]) }}" method="POST" onsubmit="return confirm('Remover este sub-tipo?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="ui small red button">
-                                                <i class="trash icon"></i> Remover
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-        <div class="ui hidden divider"></div>
-
-        <h3 class="ui header">
-            <i class="plus icon"></i>
+        <div id="children-empty" class="ui info message admin-empty-state" style="display: none;">
+            <i class="search icon"></i>
             <div class="content">
-                Novo sub-tipo
-                <div class="sub header">Adicione um sub-tipo a "{{ $parentName }}".</div>
+                <div class="header">Nenhum resultado encontrado</div>
+                <p>Ajuste a busca ou limpe o campo para ver todos os sub-tipos.</p>
             </div>
-        </h3>
+        </div>
 
-        @if (!$canCreate)
-            <div class="ui warning message">
-                <i class="exclamation triangle icon"></i>
-                <div class="content">
-                    <div class="header">Variante do tipo pai não definida.</div>
-                    <p>O tipo pai precisa ter uma variante definida antes que sub-tipos possam ser criados.</p>
-                </div>
+        <div id="children-pagination" class="admin-pagination-container"></div>
+    @endif
+</div>
+
+<div class="admin-section">
+    <h3 class="ui header">
+        <i class="plus icon"></i>
+        <div class="content">
+            Novo sub-tipo
+            <div class="sub header">Adicione um sub-tipo a "{{ $parentName }}".</div>
+        </div>
+    </h3>
+
+    @if (!$canCreate)
+        <div class="ui warning message">
+            <i class="exclamation triangle icon"></i>
+            <div class="content">
+                <div class="header">Variante do tipo pai não definida.</div>
+                <p>O tipo pai precisa ter uma variante definida antes que sub-tipos possam ser criados.</p>
             </div>
-        @endif
+        </div>
+    @endif
 
-        <form class="ui form" method="POST" action="{{ route('admin.types.store', ['id' => $parentId]) }}">
-            @csrf
-            <input type="hidden" name="variant_type" value="{{ $parentVariantType }}">
+    <form class="ui form" method="POST" action="{{ route('admin.types.store', ['id' => $parentId]) }}">
+        @csrf
+        <input type="hidden" name="variant_type" value="{{ $parentVariantType }}">
 
-            <div class="three fields">
-                <div class="field {{ $errors->has('name') ? 'error' : '' }}">
-                    <label>Nome</label>
-                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Ex.: Camisetas" required {{ $canCreate ? '' : 'disabled' }}>
-                </div>
-
-                <div class="field {{ $errors->has('slug') ? 'error' : '' }}">
-                    <label>Slug</label>
-                    <input type="text" name="slug" value="{{ old('slug') }}" placeholder="Ex.: camisetas" required {{ $canCreate ? '' : 'disabled' }}>
-                </div>
-
-                <div class="field disabled">
-                    <label>Tipo de variante</label>
-                    <input
-                        type="text"
-                        value="{{ $variantTypeLabel ?: 'Não definida' }}"
-                        readonly
-                        disabled
-                        title="Definida pelo tipo pai e não pode ser alterada."
-                    >
-                    <small style="color: #888;">Herdada do tipo pai.</small>
-                </div>
+        <div class="three fields">
+            <div class="field {{ $errors->has('name') ? 'error' : '' }}">
+                <label>Nome</label>
+                <input type="text" name="name" value="{{ old('name') }}" placeholder="Ex.: Camisetas" required {{ $canCreate ? '' : 'disabled' }}>
             </div>
 
-            <div class="field {{ $errors->has('description') ? 'error' : '' }}">
-                <label>Descrição</label>
-                <textarea name="description" rows="3" placeholder="Opcional" {{ $canCreate ? '' : 'disabled' }}>{{ old('description') }}</textarea>
+            <div class="field {{ $errors->has('slug') ? 'error' : '' }}">
+                <label>Slug</label>
+                <input type="text" name="slug" value="{{ old('slug') }}" placeholder="Ex.: camisetas" required {{ $canCreate ? '' : 'disabled' }}>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="ui primary button {{ $canCreate ? '' : 'disabled' }}" {{ $canCreate ? '' : 'disabled' }}>
-                    <i class="save icon"></i> Criar sub-tipo
-                </button>
-                <a href="{{ route('admin.types.index') }}" class="ui button">Cancelar</a>
+            <div class="field disabled">
+                <label>Tipo de variante</label>
+                <input
+                    type="text"
+                    value="{{ $variantTypeLabel ?: 'Não definida' }}"
+                    readonly
+                    disabled
+                    title="Definida pelo tipo pai e não pode ser alterada."
+                >
+                <small style="color: #888;">Herdada do tipo pai.</small>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="field {{ $errors->has('description') ? 'error' : '' }}">
+            <label>Descrição</label>
+            <textarea name="description" rows="3" placeholder="Opcional" {{ $canCreate ? '' : 'disabled' }}>{{ old('description') }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="ui primary button {{ $canCreate ? '' : 'disabled' }}" {{ $canCreate ? '' : 'disabled' }}>
+                <i class="save icon"></i> Criar sub-tipo
+            </button>
+            <a href="{{ route('admin.types.index') }}" class="ui button">Cancelar</a>
+        </div>
+    </form>
 </div>
 @endsection
 

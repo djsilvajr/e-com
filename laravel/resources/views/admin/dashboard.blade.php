@@ -2,56 +2,92 @@
 
 @section('title', 'Dashboard - Admin')
 
+@push('head')
+<style>
+    .dashboard-greeting {
+        margin-bottom: 1.5em;
+    }
+    .dashboard-greeting .greeting {
+        font-size: 1.05rem;
+        color: #555;
+    }
+    .ui.cards.admin-shortcuts {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .ui.cards.admin-shortcuts > .card.admin-card .content .header i.icon {
+        margin-right: 0.4em;
+        color: #2185d0;
+    }
+    .ui.cards.admin-shortcuts > .card.admin-card.disabled {
+        opacity: 0.55;
+        pointer-events: none;
+    }
+    .ui.cards.admin-shortcuts > .card.admin-card .disabled-pill {
+        display: inline-block;
+        margin-top: 0.6em;
+        padding: 0.2em 0.7em;
+        background: #e0e1e2;
+        color: #777;
+        border-radius: 999px;
+        font-size: 0.72em;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+</style>
+@endpush
+
 @section('content')
-<div class="ui container">
-    <div class="ui top attached inverted menu" style="border-radius: 0;">
-        <div class="header item">
-            <i class="shield alternate icon"></i> Painel Administrativo
-        </div>
-        <div class="right menu">
-            <div class="item">
-                <i class="user icon"></i>
-                {{ \Illuminate\Support\Facades\Auth::guard('web')->user()->name ?? '' }}
-            </div>
-            <form action="{{ route('admin.logout') }}" method="POST" style="margin: 0;">
-                @csrf
-                <button type="submit" class="ui item" style="background: transparent; border: 0; color: #fff; cursor: pointer;">
-                    <i class="sign-out icon"></i> Sair
-                </button>
-            </form>
-        </div>
+@php
+    $userName = \Illuminate\Support\Facades\Auth::guard('web')->user()->name ?? '';
+    $firstName = trim(explode(' ', $userName)[0] ?? '');
+    $hour = (int) now()->format('H');
+    $greeting = $hour < 12 ? 'Bom dia' : ($hour < 18 ? 'Boa tarde' : 'Boa noite');
+@endphp
+
+<div class="admin-page-header">
+    <div class="ui breadcrumb">
+        <div class="active section">Dashboard</div>
+    </div>
+</div>
+
+<div class="admin-section">
+    <div class="dashboard-greeting">
+        <h2 class="ui header">
+            {{ $greeting }}@if ($firstName), {{ $firstName }}@endif!
+            <div class="sub header">Bem-vindo(a) ao painel administrativo.</div>
+        </h2>
+        <p class="greeting">Use os atalhos abaixo para gerenciar o catálogo da loja.</p>
     </div>
 
-    <div class="ui bottom attached segment" style="padding: 2em;">
-        <h2 class="ui header">Bem-vindo(a) ao admin</h2>
-        <p>Use o menu para gerenciar produtos, tipos de produto, preços e categorias.</p>
-
-        <div class="ui four stackable cards">
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header"><i class="boxes icon"></i> Produtos</div>
-                    <div class="description">Cadastrar e editar produtos</div>
-                </div>
-            </a>
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header"><i class="sitemap icon"></i> Categorias</div>
-                    <div class="description">Organizar o catálogo</div>
-                </div>
-            </a>
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header"><i class="dollar sign icon"></i> Preços</div>
-                    <div class="description">Atualizar valores</div>
-                </div>
-            </a>
-            <a href="{{ route('admin.types.index') }}" class="ui card">
-                <div class="content">
-                    <div class="header"><i class="tags icon"></i> Tipos de produtos</div>
-                    <div class="description">Gerenciar tipos de produto</div>
-                </div>
-            </a>
-        </div>
+    <div class="ui four stackable cards admin-shortcuts">
+        <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
+            <div class="content">
+                <div class="header"><i class="boxes icon"></i> Produtos</div>
+                <div class="description">Cadastrar e editar produtos</div>
+                <span class="disabled-pill">Em breve</span>
+            </div>
+        </a>
+        <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
+            <div class="content">
+                <div class="header"><i class="sitemap icon"></i> Categorias</div>
+                <div class="description">Organizar o catálogo</div>
+                <span class="disabled-pill">Em breve</span>
+            </div>
+        </a>
+        <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
+            <div class="content">
+                <div class="header"><i class="dollar sign icon"></i> Preços</div>
+                <div class="description">Atualizar valores</div>
+                <span class="disabled-pill">Em breve</span>
+            </div>
+        </a>
+        <a href="{{ route('admin.types.index') }}" class="ui card admin-card" data-loading>
+            <div class="content">
+                <div class="header"><i class="tags icon"></i> Tipos de produtos</div>
+                <div class="description">Gerenciar tipos de produto</div>
+            </div>
+        </a>
     </div>
 </div>
 @endsection
