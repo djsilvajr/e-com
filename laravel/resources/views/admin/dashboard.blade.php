@@ -70,13 +70,6 @@
         </a>
         <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
             <div class="content">
-                <div class="header"><i class="sitemap icon"></i> Categorias</div>
-                <div class="description">Organizar o catálogo</div>
-                <span class="disabled-pill">Em breve</span>
-            </div>
-        </a>
-        <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
-            <div class="content">
                 <div class="header"><i class="dollar sign icon"></i> Preços</div>
                 <div class="description">Atualizar valores</div>
                 <span class="disabled-pill">Em breve</span>
@@ -84,8 +77,8 @@
         </a>
         <a href="{{ route('admin.types.index') }}" class="ui card admin-card" data-loading>
             <div class="content">
-                <div class="header"><i class="tags icon"></i> Tipos de produtos</div>
-                <div class="description">Gerenciar tipos de produto</div>
+                <div class="header"><i class="sitemap icon"></i> Categorias</div>
+                <div class="description">Organizar o tipo de produto que é vendido no e-commerce.</div>
             </div>
         </a>
     </div>
