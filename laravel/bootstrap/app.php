@@ -8,6 +8,7 @@ use App\Http\Middleware\TraceRequests;
 use App\Http\Middleware\ApiAuthenticate;
 use App\Http\Middleware\WebAuthenticate;
 use App\Http\Middleware\CheckUserPermission;
+use App\Http\Middleware\CheckWebPermission;
 use GPBMetadata\Opentelemetry\Proto\Trace\V1\Trace;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -22,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.auth' => ApiAuthenticate::class,
             'web.auth' => WebAuthenticate::class,
             'api.permission' => CheckUserPermission::class,
+            'web.permission' => CheckWebPermission::class,
             'trace.request' => TraceRequests::class,
         ]);
 

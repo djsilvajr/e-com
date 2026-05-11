@@ -124,19 +124,79 @@ CSRF:
 
 ### Protecting routes
 
-Protected web routes are placed inside the `web.stack` middleware group. That group already wires up session + `web.auth:web` + CSRF + error sharing. Admin routes SHOULD additionally be grouped under the `/admin` prefix and may gain a role/permission middleware later — but the base auth is still the session guard `web`.
+Protected web routes are placed inside the `web.stack` middleware group. That group already wires up session + `web.auth:web` + CSRF + error sharing. Admin routes are additionally grouped under the `/admin` prefix and MUST be gated by the `web.permission` middleware (see "Authorization (Roles / Permissions)" below) — but the base auth is still the session guard `web`.
 
 ```php
 Route::prefix('admin')->group(function () {
+    // Public admin routes — login pages, NO permission check
     Route::get('/login', [AdminLoginController::class, 'loginView'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'loginAttempt'])->name('admin.login.attempt');
 
-    Route::middleware('web.stack')->group(function () {
+    // Protected admin routes — auth + admin role enforced
+    Route::middleware(['web.stack', 'web.permission:admin'])->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     });
 });
 ```
+
+## Authorization (Roles / Permissions) — CRITICAL
+
+The web side uses a dedicated middleware called `web.permission`, registered in
+`bootstrap/app.php` and implemented by `App\Http\Middleware\CheckWebPermission`.
+It is the **web equivalent** of the API's `api.permission` middleware:
+
+| Surface | Alias            | Class                                       | Guard | Checks                       |
+|---------|------------------|---------------------------------------------|-------|------------------------------|
+| API     | `api.permission` | `App\Http\Middleware\CheckUserPermission`   | `api` | `user->hasPermission($name)` |
+| Web     | `web.permission` | `App\Http\Middleware\CheckWebPermission`    | `web` | Role name OR permission name |
+
+### How `web.permission` works
+
+`web.permission:{name}` reads the authenticated user from the **session guard
+(`web`)** and accepts the given `{name}` as **either**:
+
+1. A **role name** (e.g. `admin`, `manager`, `user`) — matched against
+   `user->roles->contains('name', $name)`.
+2. A **permission name** (e.g. `user.delete`) — matched against
+   `user->hasPermission($name)` (which walks roles → permissions).
+
+Failure handling:
+
+- **Not authenticated on the `web` guard** → `redirect()->route('admin.login')`.
+- **Authenticated but missing the required role/permission** → `abort(403)`
+  with a clear message. (Web Controllers MUST NOT return JSON — the 403 is
+  rendered by Laravel's default error view.)
+
+### Usage
+
+```php
+// Mirrors api.permission:user.delete — but for the web guard
+Route::middleware('web.permission:admin')->group(function () { ... });
+
+Route::middleware('web.permission:user.delete')->group(function () { ... });
+```
+
+### Admin area rule (STRICT)
+
+**Every route under `/admin` MUST be gated by `web.permission:admin`, with the
+sole exception of the login routes** (`GET /admin/login` and
+`POST /admin/login`). The login routes MUST stay public so an unauthenticated
+admin can actually reach the form. Everything else — dashboard, logout, all
+future admin CRUD — goes inside the `['web.stack', 'web.permission:admin']`
+middleware stack.
+
+Rules:
+
+- Do NOT add `web.permission:admin` to login routes (creates a redirect loop /
+  permanent 403 for non-logged-in admins).
+- Do NOT rely on hiding admin links in the navbar as the only protection — the
+  middleware is the source of truth.
+- Storefront routes (`/`) do NOT use `web.permission:admin`. If a storefront
+  route needs gating, use `web.permission` with the appropriate role /
+  permission name (e.g. `web.permission:user`).
+- Never use `api.permission` on a web route — it depends on the JWT guard and
+  will not see the session user.
 
 ## Validation
 

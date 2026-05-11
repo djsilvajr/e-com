@@ -51,12 +51,22 @@ Route::middleware('web.stack')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->group(function () use ($webPublic) {
+    /*
+    | Public admin routes (login) — NO admin permission check.
+    | Adding `web.permission:admin` here would block the very login page.
+    */
     Route::middleware($webPublic)->group(function () {
         Route::get('/login', [AdminLoginController::class, 'loginView'])->name('admin.login');
         Route::post('/login', [AdminLoginController::class, 'loginAttempt'])->name('admin.login.attempt');
     });
 
-    Route::middleware('web.stack')->group(function () {
+    /*
+    | Protected admin routes — require an authenticated user on the "web"
+    | guard AND the "admin" role (enforced by web.permission:admin).
+    | If the user is not authenticated they are redirected to admin.login;
+    | if they are authenticated but not an admin they receive HTTP 403.
+    */
+    Route::middleware(['web.stack', 'web.permission:admin'])->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     });
