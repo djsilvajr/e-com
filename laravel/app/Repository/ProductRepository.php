@@ -71,4 +71,24 @@ class ProductRepository implements ProductInterface
 
         return true;
     }
+
+    public function get(int $product_type_id = 0)
+    {
+        try {
+            $products = ProductModel::findByVariantType(
+                $product_type_id
+            );
+
+            if ($products->isEmpty()) {
+                return null;
+            }
+
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException(
+                $e->getMessage()
+            );
+        }
+
+        return $products->toArray();
+    }
 }

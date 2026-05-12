@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductModel extends Model
 {
@@ -15,4 +16,14 @@ class ProductModel extends Model
         'meta_keywords' => 'array',
         'available_at' => 'datetime',
     ];
+
+    public static function findByVariantType(
+        int $typeId = 0
+    ): Collection {
+        return self::query()
+            ->when($typeId, function ($query) use ($typeId) {
+                $query->where('product_type_id', $typeId);
+            })
+            ->get();
+    }
 }

@@ -2541,7 +2541,173 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ErrorResponse'   
+                $ref: '#/definitions/ErrorResponse' 
+    get:
+      tags:
+        - PRODUCT
+      summary: List products
+      description: Retrieve a list of products with optional filters.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_type_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          example: 3
+      responses:
+        '200':
+          description: Products retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Product deleted successfully.
+                  errors:
+                    type: array
+                    items: {}
+                    example: []
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        product_type_id:
+                          type: integer
+                          example: 3
+                        name:
+                          type: string
+                          example: Camisa Nike Dri-FIT Masculina
+                        sku:
+                          type: string
+                          example: CAM-NIKE-DRIFIT-001
+                        description:
+                          type: string
+                        short_description:
+                          type: string
+                        brand:
+                          type: string
+                          example: Nike
+                        model:
+                          type: string
+                          example: Dri-FIT Legend
+                        attributes:
+                          type: object
+                          nullable: true
+                          properties:
+                            origem:
+                              type: string
+                              example: Importado
+                            cuidados:
+                              type: string
+                              example: Lavar à máquina em água fria
+                            material:
+                              type: string
+                              example: Poliéster 100%
+                            tecnologia:
+                              type: string
+                              example: Dri-FIT
+                        avg_weight:
+                          type: string
+                          example: "0.18"
+                        avg_dimensions:
+                          type: object
+                          nullable: true
+                        total_stock:
+                          type: integer
+                          example: 0
+                        min_stock:
+                          type: integer
+                          example: 20
+                        meta_title:
+                          type: string
+                          example: Camisa Nike Dri-FIT - Tecnologia Esportiva
+                        meta_description:
+                          type: string
+                          nullable: true
+                        meta_keywords:
+                          type: array
+                          nullable: true
+                          items:
+                            type: string
+                        active:
+                          type: boolean
+                          example: true
+                        is_featured:
+                          type: boolean
+                          example: true
+                        is_new:
+                          type: boolean
+                          example: true
+                        has_variants:
+                          type: boolean
+                          example: true
+                        available_at:
+                          type: string
+                          format: date-time
+                          example: "2026-04-16T16:17:16.000000Z"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2026-04-16T16:17:16.000000Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2026-04-16T16:17:16.000000Z"
+                        deleted_at:
+                          type: string
+                          nullable: true
+                          example: null
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/{id}
+                          method:
+                            type: string
+                            example: GET
+                      create:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product
+                          method:
+                            type: string
+                            example: POST
+                      delete:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/{id}
+                          method:
+                            type: string
+                            example: DELETE
+                      update:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: http://localhost:8020/v1/product/{id}
+                          method:
+                            type: string
+                            example: PUT 
   /api/v1/product/{id}:
     get:
       tags:

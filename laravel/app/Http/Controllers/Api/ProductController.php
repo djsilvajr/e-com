@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Services\ProductService;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\GetProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\DeleteProductRequest;
 
@@ -138,6 +139,36 @@ class ProductController extends Controller
                 ],
                 'update' => [
                     'href' => url("/v1/product/{$id}"),
+                    'method' => 'PUT'
+                ],
+            ]
+        ]);
+    }
+
+    public function getProduct(GetProductRequest $request) {
+        
+        $data = $this->productService->getProduct($request);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product deleted successfully.',
+            'errors' => [],
+            'data' => $data,
+            '_links' => [
+                'self' => [
+                    'href' => url("/v1/product/{id}"),
+                    'method' => 'GET'
+                ],
+                'create' => [
+                    'href' => url("/v1/product/"),
+                    'method' => 'POST'
+                ],
+                'delete' => [
+                    'href' => url("/v1/product/{id}"),
+                    'method' => 'DELETE'
+                ],
+                'update' => [
+                    'href' => url("/v1/product/{id}"),
                     'method' => 'PUT'
                 ],
             ]

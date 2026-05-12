@@ -36,6 +36,7 @@ Route::middleware('api.stack')->group(function () {
 
     //Product
     Route::post('v1/product', [ProductController::class, 'createProduct']);
+    Route::get('v1/product', [ProductController::class, 'getProduct']);
     Route::put('v1/product/{id}', [ProductController::class, 'updateProduct']);
     Route::get('v1/product/{id}', [ProductController::class, 'getProductById']);
     Route::delete('v1/product/{id}', [ProductController::class, 'deleteProduct']);
