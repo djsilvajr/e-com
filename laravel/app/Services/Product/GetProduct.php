@@ -15,8 +15,9 @@ class GetProduct
 
         $data = is_array($request) ? $request : $request->all();
         $product_type_id = $data['product_type_id'] ?? 0;
+        $name = $data['name'] ?? '';
 
-        $product = $this->repository->get($product_type_id);
+        $product = $this->repository->get($product_type_id, $name);
         return $product;
     }
 }

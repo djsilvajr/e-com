@@ -72,11 +72,12 @@ class ProductRepository implements ProductInterface
         return true;
     }
 
-    public function get(int $product_type_id = 0)
+    public function get(int $product_type_id = 0, $name = '')
     {
         try {
             $products = ProductModel::findByVariantType(
-                $product_type_id
+                $product_type_id,
+                $name
             );
 
             if ($products->isEmpty()) {

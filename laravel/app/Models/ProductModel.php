@@ -18,11 +18,15 @@ class ProductModel extends Model
     ];
 
     public static function findByVariantType(
-        int $typeId = 0
+        int $typeId = 0,
+        string $name = ''
     ): Collection {
         return self::query()
             ->when($typeId, function ($query) use ($typeId) {
                 $query->where('product_type_id', $typeId);
+            })
+            ->when($name !== '', function ($query) use ($name) {
+                $query->where('name', 'LIKE', "%{$name}%");
             })
             ->get();
     }

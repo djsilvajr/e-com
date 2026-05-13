@@ -5,7 +5,7 @@ namespace App\Repository\Contracts;
 interface ProductInterface
 {
     public function findById(int $id);
-    public function get(int $product_type_id);
+    public function get(int $product_type_id, string $name);
     public function findProductBySku(string $sku);
     public function createProduct(array $data);
     public function updateProduct(int $id, array $data);

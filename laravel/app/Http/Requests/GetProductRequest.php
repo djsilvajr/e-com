@@ -15,6 +15,7 @@ class GetProductRequest extends FormRequest
     {
         return [
             'product_type_id'  => ['required', 'integer', 'min:1'],
+            'name'             => ['nullable', 'string', 'min:3'],
         ];
     }
 
