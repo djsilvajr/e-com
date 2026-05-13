@@ -10,46 +10,34 @@ Before writing a single line of code, the LLM MUST read and follow:
 
 ## Taks
 
-Preciso de uma pagina de admin/types para a administração de variantes dentro do sistema.
-Existem alguns tipos pré definidos no sistema que o usuario vai poder definir ao incluir um produto.
-Na tela de admin existe a opção Variantes, quero que remova ela e coloque "Tipos de produtos" e em baixo esteja ao invés de Gerenciar variantes do produto, seja "Gerenciar tipos de produto".
-A ideia da página é listar os principais tipos, com estes tipos o usuario vai selecionar o tipo pai que ira listar os filhos e assim por diante. Ao selecionar o tipo pai, vai existir a listagem dos filhos e uma opção de adicionar filho que vai trazer um modal para adicionar o filho. Os filhos também podem ter filhos, então vai seguir a mesma lógica.
+Preciso de uma pagina de admin/products para a administração de produtos dentro do sistema.
+A tela vai se iniciar com uma tabela de busca de produto, na primeira vez que entrar na tela não será retornado nenhum dado, o usuário vai precisar pesquisar através do tipo do produto (roupas, eletronicos, etc) e do seu nome se quiser, no qual é preciso de pelo menos 3 digitos para buscar pois é feito com like. A pesquisa vai ser obrigatório ter um tipo selecionado.
+
+A tela vai permitir deletar, editar e criar um novo produto. A tela de edição e criação vai ser separado da tela de listagem. Nesta tela vai ter interações com a tabela de products e vai ter uma opção que possibilita o usuario adicionar variantes do produto caso já esteja cadastrado abrindo outra tela ligada pelo id do produto que vai interagir com a tela de product_variants onde teremos uma listagem das variantes do produto. A nessa tela teremos interações para selecionar uma variante para editar que nos levara para a tela da edição da variante ou adicionar uma nova. Variantes poderão ser excluidas.
+
 
 ## Atenção
 
-- Esta tela não vai incluir produtos, apenas vai trabalhar com os tipos
-- já existe um backend escrito para os tipos, pode usar os usecases para completar a tarefa e não repitir código
-
+- já existe um backend escrito para estes cenários, pode usar os usecases para completar a tarefa e não repitir código
+- não existe um endpoint para listar todas as variantes de um produto, esta é a unica rota que deverá ser criado.
+    Route::get('v1/product/{product_id}/variant/', [ProductVariantController::class, 'getVariant']);
 
 ## Adicionais
 
-Os tipos e as possibilidades que são oferecidas estão nestes endpoints
+Endpoints que poderão ser utilizados como ajuda
 
 //Product Type
 Route::get('v1/product/types', [ProductTypeController::class, 'getProductTypes']);
-Route::get('v1/product/type/{id}', [ProductTypeController::class, 'getProductTypeById']);
-Route::get('v1/product/type/{id}/child', [ProductTypeController::class, 'getChildProductTypesById']);
-Route::post('v1/product/type/{id}/child', [ProductTypeController::class, 'createChildProductType']);
-Route::patch('v1/product/type/{id}/status', [ProductTypeController::class, 'changeProductTypeActivationStatus']);
-Route::delete('v1/product/type/{id}/', [ProductTypeController::class, 'deleteProductTypeById']);
 
+//Product
+Route::post('v1/product', [ProductController::class, 'createProduct']);
+Route::get('v1/product', [ProductController::class, 'getProduct']);
+Route::put('v1/product/{id}', [ProductController::class, 'updateProduct']);
+Route::get('v1/product/{id}', [ProductController::class, 'getProductById']);
+Route::delete('v1/product/{id}', [ProductController::class, 'deleteProduct']);
 
-Existem tipos pré definidos no sistema e são já colocados no inicio do sistema e estão no arquivo de migration do product_types. Os tipos são estes
-
-$table->enum('variant_type', [
-    'clothing',      // Roupas/Calçados
-    'electronics',   // Eletrônicos
-    'furniture',     // Móveis
-    'books',         // Livros (sem variantes)
-    'simple'         // Produtos simples (sem variantes)
-])->nullable(); // Null = categoria pai sem produtos diretos
-
-
-A ideia é que atributos a mais poderão ser adicionados em tipos especificos, estes atributos estão nas migrations que trabalham com:
-
-clothing_variant_attributes
-electronics_variant_attributes
-furniture_variant_attributes
-books_variant_attributes
-
-O simple vai ser uma saida para o usuario adicionar tipos diferentes sem depender do sistema para funções especificas que poderão ser trabalhadas detalhadamente no sistema.
+//Product Variant
+Route::get('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'getVariant']);
+Route::post('v1/product/{product_id}/variant', [ProductVariantController::class, 'addVariant']);
+Route::put('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'updateVariant']);
+Route::delete('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'deleteVariant']);

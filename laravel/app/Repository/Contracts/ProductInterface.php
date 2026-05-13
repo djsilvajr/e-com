@@ -6,6 +6,7 @@ interface ProductInterface
 {
     public function findById(int $id);
     public function get(int $product_type_id, string $name);
+    public function getFiltered(string $variantType, ?int $productTypeId, string $name): array;
     public function findProductBySku(string $sku);
     public function createProduct(array $data);
     public function updateProduct(int $id, array $data);

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Services\ProductVariant\GetProductVariant;
+use App\Services\ProductVariant\ListProductVariants;
 use App\Services\ProductVariant\AddProductVariant;
 use App\Services\ProductVariant\UpdateProductVariant;
 use App\Services\ProductVariant\DeleteProductVariant;
@@ -11,6 +12,7 @@ class ProductVariantService
 {
     public function __construct(
         private GetProductVariant $getProductVariant,
+        private ListProductVariants $listProductVariants,
         private AddProductVariant $addProductVariant,
         private UpdateProductVariant $updateProductVariant,
         private DeleteProductVariant $deleteProductVariant,
@@ -19,6 +21,11 @@ class ProductVariantService
     public function get(int $productId, int $id): array
     {
         return $this->getProductVariant->execute($productId, $id);
+    }
+
+    public function list(int $productId): array
+    {
+        return $this->listProductVariants->execute($productId);
     }
 
     public function add(int $productId, array $data): array

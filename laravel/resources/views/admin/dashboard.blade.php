@@ -61,11 +61,10 @@
     </div>
 
     <div class="ui four stackable cards admin-shortcuts">
-        <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">
+        <a href="{{ route('admin.products.index') }}" class="ui card admin-card" data-loading>
             <div class="content">
                 <div class="header"><i class="boxes icon"></i> Produtos</div>
-                <div class="description">Cadastrar e editar produtos</div>
-                <span class="disabled-pill">Em breve</span>
+                <div class="description">Cadastrar, editar e gerenciar variantes</div>
             </div>
         </a>
         <a href="#" class="ui card admin-card disabled" aria-disabled="true" title="Em breve">

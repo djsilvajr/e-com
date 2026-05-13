@@ -6,6 +6,7 @@ interface ProductVariantInterface
 {
     public function findById(int $id);
     public function findByProductIdAndId(int $productId, int $id);
+    public function findAllByProductId(int $productId): array;
     public function findBySku(string $sku);
     public function findByBarcode(string $barcode);
     public function findByProductIdAndOrder(int $productId, int $order);

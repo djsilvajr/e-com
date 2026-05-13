@@ -48,6 +48,7 @@ Route::middleware('api.stack')->group(function () {
     Route::delete('v1/product/{product_id}/price', [ProductPriceController::class, 'deletePrice']);
 
     //Product Variant
+    Route::get('v1/product/{product_id}/variant', [ProductVariantController::class, 'getVariants']);
     Route::get('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'getVariant']);
     Route::post('v1/product/{product_id}/variant', [ProductVariantController::class, 'addVariant']);
     Route::put('v1/product/{product_id}/variant/{id}', [ProductVariantController::class, 'updateVariant']);

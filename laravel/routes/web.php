@@ -7,6 +7,8 @@ use App\Http\Controllers\Web\Storefront\StorefrontHomeController;
 use App\Http\Controllers\Web\Admin\AdminLoginController;
 use App\Http\Controllers\Web\Admin\AdminDashboardController;
 use App\Http\Controllers\Web\Admin\AdminProductTypeController;
+use App\Http\Controllers\Web\Admin\AdminProductController;
+use App\Http\Controllers\Web\Admin\AdminProductVariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +90,45 @@ Route::prefix('admin')->group(function () use ($webPublic) {
             Route::delete('/types/{id}', [AdminProductTypeController::class, 'destroy'])
                 ->whereNumber('id')
                 ->name('admin.types.destroy');
+        });
+
+        /*
+        | Products administration
+        */
+        Route::prefix('products')->group(function () {
+            Route::get('/', [AdminProductController::class, 'index'])->name('admin.products.index');
+            Route::get('/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+            Route::post('/', [AdminProductController::class, 'store'])->name('admin.products.store');
+            Route::get('/{id}/edit', [AdminProductController::class, 'edit'])
+                ->whereNumber('id')
+                ->name('admin.products.edit');
+            Route::put('/{id}', [AdminProductController::class, 'update'])
+                ->whereNumber('id')
+                ->name('admin.products.update');
+            Route::delete('/{id}', [AdminProductController::class, 'destroy'])
+                ->whereNumber('id')
+                ->name('admin.products.destroy');
+
+            /*
+            | Variants of a product
+            */
+            Route::prefix('{product_id}/variants')->whereNumber('product_id')->group(function () {
+                Route::get('/', [AdminProductVariantController::class, 'index'])
+                    ->name('admin.products.variants.index');
+                Route::get('/create', [AdminProductVariantController::class, 'create'])
+                    ->name('admin.products.variants.create');
+                Route::post('/', [AdminProductVariantController::class, 'store'])
+                    ->name('admin.products.variants.store');
+                Route::get('/{id}/edit', [AdminProductVariantController::class, 'edit'])
+                    ->whereNumber('id')
+                    ->name('admin.products.variants.edit');
+                Route::put('/{id}', [AdminProductVariantController::class, 'update'])
+                    ->whereNumber('id')
+                    ->name('admin.products.variants.update');
+                Route::delete('/{id}', [AdminProductVariantController::class, 'destroy'])
+                    ->whereNumber('id')
+                    ->name('admin.products.variants.destroy');
+            });
         });
     });
 });

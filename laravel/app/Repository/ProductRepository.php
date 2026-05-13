@@ -92,4 +92,41 @@ class ProductRepository implements ProductInterface
 
         return $products->toArray();
     }
+
+    /**
+     * Search products by:
+     *   - product_type_id (exact match) when > 0; OR
+     *   - variant_type (root category — joins product_types.variant_type)
+     *     when product_type_id is empty.
+     * Optionally filters by name LIKE %name%.
+     */
+    public function getFiltered(string $variantType, ?int $productTypeId, string $name): array
+    {
+        try {
+            $query = ProductModel::query();
+
+            if ($productTypeId !== null && $productTypeId > 0) {
+                $query->where('product_type_id', $productTypeId);
+            } elseif ($variantType !== '') {
+                $query->whereIn('product_type_id', function ($sub) use ($variantType) {
+                    $sub->select('id')
+                        ->from('product_types')
+                        ->where('variant_type', $variantType);
+                });
+            } else {
+                // Nothing to filter by — return empty to avoid accidental full scan.
+                return [];
+            }
+
+            if ($name !== '') {
+                $query->where('name', 'LIKE', "%{$name}%");
+            }
+
+            $products = $query->orderBy('name')->get();
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException($e->getMessage());
+        }
+
+        return $products ? $products->toArray() : [];
+    }
 }

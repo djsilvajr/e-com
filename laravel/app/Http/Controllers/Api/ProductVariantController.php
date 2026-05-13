@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\ProductVariantService;
 use App\Http\Requests\GetProductVariantRequest;
+use App\Http\Requests\GetProductVariantsRequest;
 use App\Http\Requests\AddProductVariantRequest;
 use App\Http\Requests\UpdateProductVariantRequest;
 use App\Http\Requests\DeleteProductVariantRequest;
@@ -14,6 +15,28 @@ class ProductVariantController extends Controller
     public function __construct(
         private ProductVariantService $productVariantService,
     ) {}
+
+    public function getVariants(GetProductVariantsRequest $request, int $product_id)
+    {
+        $variants = $this->productVariantService->list($product_id);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product variants fetched successfully.',
+            'errors' => [],
+            'data' => $variants,
+            '_links' => [
+                'self' => [
+                    'href' => url("/v1/product/{$product_id}/variant/"),
+                    'method' => 'GET',
+                ],
+                'create' => [
+                    'href' => url("/v1/product/{$product_id}/variant/"),
+                    'method' => 'POST',
+                ],
+            ],
+        ]);
+    }
 
     public function getVariant(GetProductVariantRequest $request, int $product_id, int $id)
     {

@@ -23,6 +23,20 @@ class ProductVariantRepository implements ProductVariantInterface
         return $variant ? $variant->toArray() : null;
     }
 
+    public function findAllByProductId(int $productId): array
+    {
+        try {
+            $variants = ProductVariantModel::where('product_id', $productId)
+                ->orderBy('order')
+                ->orderBy('id')
+                ->get();
+        } catch (\Throwable $e) {
+            throw new PersistenceErrorException();
+        }
+
+        return $variants ? $variants->toArray() : [];
+    }
+
     public function findBySku(string $sku)
     {
         try {

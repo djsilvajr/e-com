@@ -12,12 +12,21 @@ class GetProduct
 
     public function execute($request)
     {
-
         $data = is_array($request) ? $request : $request->all();
-        $product_type_id = $data['product_type_id'] ?? 0;
-        $name = $data['name'] ?? '';
+        $variantType   = (string) ($data['variant_type'] ?? '');
+        $productTypeId = (int) ($data['product_type_id'] ?? 0);
+        $name          = (string) ($data['name'] ?? '');
 
-        $product = $this->repository->get($product_type_id, $name);
-        return $product;
+        // New API: search by variant_type (root category) or by a specific
+        // product_type_id (sub-type). When neither is provided, return empty.
+        if ($variantType !== '' || $productTypeId > 0) {
+            return $this->repository->getFiltered(
+                $variantType,
+                $productTypeId > 0 ? $productTypeId : null,
+                $name
+            );
+        }
+
+        return [];
     }
 }
