@@ -264,9 +264,9 @@ class AdminProductController extends Controller
 
         return [
             'clothing'    => 'Roupas',
-            //'electronics' => 'Eletrônicos',
-            //'furniture'   => 'Móveis',
-            //'books'       => 'Livros',
+            'electronics' => 'Eletrônicos',
+            'furniture'   => 'Móveis',
+            'books'       => 'Livros',
         ];
     }
 
