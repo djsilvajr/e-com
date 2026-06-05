@@ -261,11 +261,12 @@ class AdminProductController extends Controller
      */
     private function variantCategoryOptions(): array
     {
+
         return [
             'clothing'    => 'Roupas',
-            'electronics' => 'Eletrônicos',
-            'furniture'   => 'Móveis',
-            'books'       => 'Livros',
+            //'electronics' => 'Eletrônicos',
+            //'furniture'   => 'Móveis',
+            //'books'       => 'Livros',
         ];
     }
 
